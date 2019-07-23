@@ -1,4 +1,4 @@
-// GET /currentconditions/v1/213225?apikey=MVu5tD8P1Pzp0kGZfdIhuIVuqGrxtYns HTTP/1.1
+// GET /currentconditions/v1/213225?apikey=MVu5tD8P1Pzp0kGZfdIhuIVuqGrxtYns
 
 export const currentWeather = [
   {

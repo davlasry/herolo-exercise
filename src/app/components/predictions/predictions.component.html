@@ -1,5 +1,11 @@
 <div class="predictions-container card">
-  <h2>Predictions</h2>
+  <app-search-bar></app-search-bar>
+  <button mat-icon-button color="accent" (click)="removeFromFavorites()">
+    <mat-icon>favorite</mat-icon>
+  </button>
+  <button mat-icon-button color="accent" (click)="addToFavorites()">
+    <mat-icon>favorite_border</mat-icon>
+  </button>
   <span>Jerusalem</span>
   <span>{{ currentWeather.Temperature.Metric.Value }}</span>
   <div class="current-weather">{{ currentWeather.WeatherText }}</div>

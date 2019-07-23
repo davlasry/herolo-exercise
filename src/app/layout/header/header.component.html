@@ -5,7 +5,12 @@
     </div>
     <ul fxlayout="row" fxLayoutAlign="start center">
       <li>
-        <a routerLink="/" routerLinkActive="active">Home</a>
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Home</a
+        >
       </li>
       <li>
         <a routerLink="/favorites" routerLinkActive="active">Favorites</a>
