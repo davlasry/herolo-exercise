@@ -38,7 +38,7 @@ export class FavoritesService {
   }
 
   removeCityFromFavorites(cityID) {
-    this.cities.push(cityID);
+    this.cities.splice(this.cities.indexOf(cityID), 1);
   }
 
   isCityInFavorites(cityID) {
