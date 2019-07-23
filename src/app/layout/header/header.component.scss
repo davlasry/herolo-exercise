@@ -1,0 +1,46 @@
+$menu-height: 60px;
+
+.menu {
+  height: $menu-height;
+  width: 100%;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  padding-left: 30px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+
+  .title {
+    color: #01d277;
+    font-size: 30px;
+    margin-right: 20px;
+  }
+
+  ul {
+    height: 100%;
+
+    li {
+      margin: 0 20px;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      &:hover a {
+        color: #ffffff;
+      }
+
+      a {
+        color: #6f6f6f;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .active {
+        color: #ffffff;
+        // font-weight: bold;
+      }
+    }
+  }
+}
