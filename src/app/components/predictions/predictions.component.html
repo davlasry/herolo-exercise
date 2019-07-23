@@ -27,10 +27,24 @@
     >
       <div *ngFor="let dayPrediction of predictions.DailyForecasts">
         <div class="day-predictions card">
-          <span>
-            {{ dayPrediction.Temperature.Maximum.Value }}
-          </span>
-          <span>{{ dayPrediction.Temperature.Maximum.Unit }}</span>
+          <div class="max-temperature">
+            <span>
+              {{ dayPrediction.Temperature.Maximum.Value }}
+            </span>
+            <span>{{ dayPrediction.Temperature.Maximum.Unit }}</span>
+          </div>
+          <div class="min-temperature">
+            <span>
+              {{ dayPrediction.Temperature.Minimum.Value }}
+            </span>
+            <span>{{ dayPrediction.Temperature.Minimum.Unit }}</span>
+          </div>
+          <div>
+            {{ dayPrediction.Date | date: 'EEEE' }}
+          </div>
+          <div>
+            {{ dayPrediction.Day.IconPhrase }}
+          </div>
         </div>
       </div>
     </div>

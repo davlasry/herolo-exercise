@@ -1,154 +1,154 @@
-// GET http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=MVu5tD8P1Pzp0kGZfdIhuIVuqGrxtYns&q=jerusalem HTTP/1.1
+// GET http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=MVu5tD8P1Pzp0kGZfdIhuIVuqGrxtYns&q=pa
 
 export const autocompleteSearch = [
   {
     Version: 1,
-    Key: '213225',
+    Key: '623',
+    Type: 'City',
+    Rank: 20,
+    LocalizedName: 'Paris',
+    Country: {
+      ID: 'FR',
+      LocalizedName: 'France'
+    },
+    AdministrativeArea: {
+      ID: '75',
+      LocalizedName: 'Ville de Paris'
+    }
+  },
+  {
+    Version: 1,
+    Key: '211288',
+    Type: 'City',
+    Rank: 21,
+    LocalizedName: 'Palembang',
+    Country: {
+      ID: 'ID',
+      LocalizedName: 'Indonesia'
+    },
+    AdministrativeArea: {
+      ID: 'SS',
+      LocalizedName: 'South Sumatra'
+    }
+  },
+  {
+    Version: 1,
+    Key: '202349',
+    Type: 'City',
+    Rank: 21,
+    LocalizedName: 'Patna',
+    Country: {
+      ID: 'IN',
+      LocalizedName: 'India'
+    },
+    AdministrativeArea: {
+      ID: 'BR',
+      LocalizedName: 'Bihar'
+    }
+  },
+  {
+    Version: 1,
+    Key: '58496',
+    Type: 'City',
+    Rank: 23,
+    LocalizedName: 'Panzhou',
+    Country: {
+      ID: 'CN',
+      LocalizedName: 'China'
+    },
+    AdministrativeArea: {
+      ID: 'GZ',
+      LocalizedName: 'Guizhou'
+    }
+  },
+  {
+    Version: 1,
+    Key: '61035',
+    Type: 'City',
+    Rank: 23,
+    LocalizedName: 'Panzhihua',
+    Country: {
+      ID: 'CN',
+      LocalizedName: 'China'
+    },
+    AdministrativeArea: {
+      ID: 'SC',
+      LocalizedName: 'Sichuan'
+    }
+  },
+  {
+    Version: 1,
+    Key: '2332592',
+    Type: 'City',
+    Rank: 25,
+    LocalizedName: 'Panyu District',
+    Country: {
+      ID: 'CN',
+      LocalizedName: 'China'
+    },
+    AdministrativeArea: {
+      ID: 'GD',
+      LocalizedName: 'Guangdong'
+    }
+  },
+  {
+    Version: 1,
+    Key: '96615',
+    Type: 'City',
+    Rank: 25,
+    LocalizedName: 'Panjin',
+    Country: {
+      ID: 'CN',
+      LocalizedName: 'China'
+    },
+    AdministrativeArea: {
+      ID: 'LN',
+      LocalizedName: 'Liaoning'
+    }
+  },
+  {
+    Version: 1,
+    Key: '259549',
     Type: 'City',
     Rank: 30,
-    LocalizedName: 'Jerusalem',
+    LocalizedName: 'Panama City',
     Country: {
-      ID: 'IL',
-      LocalizedName: 'Israel'
+      ID: 'PA',
+      LocalizedName: 'Panama'
     },
     AdministrativeArea: {
-      ID: 'JM',
-      LocalizedName: 'Jerusalem'
+      ID: '8',
+      LocalizedName: 'Panamá'
     }
   },
   {
     Version: 1,
-    Key: '250835',
+    Key: '206120',
     Type: 'City',
-    Rank: 65,
-    LocalizedName: 'Jerusalem',
+    Rank: 31,
+    LocalizedName: 'Padang',
     Country: {
-      ID: 'NZ',
-      LocalizedName: 'New Zealand'
+      ID: 'ID',
+      LocalizedName: 'Indonesia'
     },
     AdministrativeArea: {
-      ID: 'MWT',
-      LocalizedName: 'Manawatu-Wanganui'
+      ID: 'SB',
+      LocalizedName: 'West Sumatra'
     }
   },
   {
     Version: 1,
-    Key: '221483',
+    Key: '233138',
     Type: 'City',
-    Rank: 75,
-    LocalizedName: 'Jerusalem',
-    Country: {
-      ID: 'JM',
-      LocalizedName: 'Jamaica'
-    },
-    AdministrativeArea: {
-      ID: '10',
-      LocalizedName: 'Westmoreland'
-    }
-  },
-  {
-    Version: 1,
-    Key: '3496636',
-    Type: 'City',
-    Rank: 85,
-    LocalizedName: 'Jerusalem',
-    Country: {
-      ID: 'AU',
-      LocalizedName: 'Australia'
-    },
-    AdministrativeArea: {
-      ID: 'SA',
-      LocalizedName: 'South Australia'
-    }
-  },
-  {
-    Version: 1,
-    Key: '1376675',
-    Type: 'City',
-    Rank: 85,
-    LocalizedName: 'Jerusalem',
-    Country: {
-      ID: 'CZ',
-      LocalizedName: 'Czechia'
-    },
-    AdministrativeArea: {
-      ID: '20',
-      LocalizedName: 'Central Bohemian'
-    }
-  },
-  {
-    Version: 1,
-    Key: '1062990',
-    Type: 'City',
-    Rank: 85,
-    LocalizedName: 'Jerusalem',
+    Rank: 31,
+    LocalizedName: 'Pachuca',
     Country: {
       ID: 'MX',
       LocalizedName: 'Mexico'
     },
     AdministrativeArea: {
-      ID: 'CHP',
-      LocalizedName: 'Chiapas'
-    }
-  },
-  {
-    Version: 1,
-    Key: '1062987',
-    Type: 'City',
-    Rank: 85,
-    LocalizedName: 'Jerusalem',
-    Country: {
-      ID: 'MX',
-      LocalizedName: 'Mexico'
-    },
-    AdministrativeArea: {
-      ID: 'DUR',
-      LocalizedName: 'Durango'
-    }
-  },
-  {
-    Version: 1,
-    Key: '1062988',
-    Type: 'City',
-    Rank: 85,
-    LocalizedName: 'Jerusalem',
-    Country: {
-      ID: 'MX',
-      LocalizedName: 'Mexico'
-    },
-    AdministrativeArea: {
-      ID: 'JAL',
-      LocalizedName: 'Jalisco'
-    }
-  },
-  {
-    Version: 1,
-    Key: '3429142',
-    Type: 'City',
-    Rank: 85,
-    LocalizedName: 'Jerusalem',
-    Country: {
-      ID: 'PH',
-      LocalizedName: 'Philippines'
-    },
-    AdministrativeArea: {
-      ID: 'NEC',
-      LocalizedName: 'Negros Occidental'
-    }
-  },
-  {
-    Version: 1,
-    Key: '2115414',
-    Type: 'City',
-    Rank: 85,
-    LocalizedName: 'Jerusalem',
-    Country: {
-      ID: 'US',
-      LocalizedName: 'United States'
-    },
-    AdministrativeArea: {
-      ID: 'OH',
-      LocalizedName: 'Ohio'
+      ID: 'HID',
+      LocalizedName: 'Hidalgo'
     }
   }
 ];

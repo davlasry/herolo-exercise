@@ -1,4 +1,8 @@
-<div class="search-bar-container" fxLayout="column" fxLayoutAlign="center center">
+<div
+  class="search-bar-container"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
   <form class="example-form">
     <mat-form-field class="example-full-width">
       <input
@@ -12,9 +16,9 @@
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option
           *ngFor="let option of filteredOptions | async"
-          [value]="option"
+          [value]="option.LocalizedName"
         >
-          {{ option }}
+          {{ option.LocalizedName }}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>

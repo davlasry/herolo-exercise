@@ -25,19 +25,17 @@ export class PredictionsComponent implements OnInit {
 
   addToFavorites() {
     console.log('Add to favorites');
-    this.favoritesService.addCityToFavorites('jerusalem');
+    this.favoritesService.addCityToFavorites(this.city);
     this.checkIfCityInFavorites();
   }
 
   removeFromFavorites() {
     console.log('Remove From favorites');
-    this.favoritesService.removeCityFromFavorites('jerusalem');
+    this.favoritesService.removeCityFromFavorites(this.city);
     this.checkIfCityInFavorites();
   }
 
   checkIfCityInFavorites() {
-    this.isCityInFavorites = this.isCityInFavorites = this.favoritesService.isCityInFavorites(
-      this.city
-    );
+    this.isCityInFavorites = this.favoritesService.isCityInFavorites(this.city);
   }
 }
