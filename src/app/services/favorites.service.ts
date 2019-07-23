@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -10,7 +10,11 @@ export class FavoritesService {
   private API_BASE_URL = 'http://dataservice.accuweather.com';
   private API_KEY = 'MVu5tD8P1Pzp0kGZfdIhuIVuqGrxtYns';
 
-  cities = [];
+  private favoriteCitiesSource = new BehaviorSubject<any[]>([]);
+  favoriteCities = this.favoriteCitiesSource.asObservable();
+
+  private favoriteCitiesArray = [];
+
   constructor(private http: HttpClient) {}
 
   getFiveDaysPredictions(cityID) {
@@ -33,16 +37,24 @@ export class FavoritesService {
       .pipe(map(movies => movies.results));
   }
 
+  // getFavorites() {
+  //   return this.favoriteCities;
+  // }
+
   addCityToFavorites(cityID) {
-    this.cities.push(cityID);
+    this.favoriteCitiesArray.push(cityID);
+    this.favoriteCitiesSource.next(this.favoriteCitiesArray);
   }
 
   removeCityFromFavorites(cityID) {
-    this.cities.splice(this.cities.indexOf(cityID), 1);
+    this.favoriteCitiesArray.splice(
+      this.favoriteCitiesArray.indexOf(cityID),
+      1
+    );
+    this.favoriteCitiesSource.next(this.favoriteCitiesArray);
   }
 
   isCityInFavorites(cityID) {
-    console.log(this.cities);
-    return this.cities.indexOf(cityID) !== -1;
+    return this.favoriteCitiesArray.indexOf(cityID) !== -1;
   }
 }
