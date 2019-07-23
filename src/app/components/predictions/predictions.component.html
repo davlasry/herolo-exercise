@@ -1,10 +1,20 @@
 <div class="predictions-container">
   <app-search-bar></app-search-bar>
   <div class="predictions-content card">
-    <button mat-icon-button color="accent" (click)="removeFromFavorites()">
+    <button
+      mat-icon-button
+      color="accent"
+      (click)="removeFromFavorites()"
+      *ngIf="isCityInFavorites"
+    >
       <mat-icon>favorite</mat-icon>
     </button>
-    <button mat-icon-button color="accent" (click)="addToFavorites()">
+    <button
+      mat-icon-button
+      color="accent"
+      (click)="addToFavorites()"
+      *ngIf="!isCityInFavorites"
+    >
       <mat-icon>favorite_border</mat-icon>
     </button>
     <span>Jerusalem</span>

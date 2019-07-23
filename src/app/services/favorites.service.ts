@@ -10,7 +10,7 @@ export class FavoritesService {
   private API_BASE_URL = 'http://dataservice.accuweather.com';
   private API_KEY = 'MVu5tD8P1Pzp0kGZfdIhuIVuqGrxtYns';
 
-  cities = ['jerusalem'];
+  cities = [];
   constructor(private http: HttpClient) {}
 
   getFiveDaysPredictions(cityID) {
@@ -42,6 +42,7 @@ export class FavoritesService {
   }
 
   isCityInFavorites(cityID) {
+    console.log(this.cities);
     return this.cities.indexOf(cityID) !== -1;
   }
 }
