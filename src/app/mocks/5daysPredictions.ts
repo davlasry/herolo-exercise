@@ -1,4 +1,4 @@
-// GET http://dataservice.accuweather.com/forecasts/v1/daily/5day/213225?apikey=MVu5tD8P1Pzp0kGZfdIhuIVuqGrxtYns HTTP/1.1
+// GET http://dataservice.accuweather.com/forecasts/v1/daily/5day/213225?apikey=MVu5tD8P1Pzp0kGZfdIhuIVuqGrxtYns
 
 export const predictions = {
   Headline: {

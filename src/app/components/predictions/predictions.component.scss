@@ -1,0 +1,16 @@
+.predictions-container {
+  padding: 50px;
+  //   min-height: 400px;
+  min-width: 600px;
+
+  .future-predictions {
+    margin-top: 40px;
+  }
+
+  .day-predictions {
+    margin: 0 30px;
+    min-width: 100px;
+    min-height: 200px;
+    padding: 20px;
+  }
+}

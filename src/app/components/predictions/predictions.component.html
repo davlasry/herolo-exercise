@@ -1,0 +1,16 @@
+<div class="predictions-container card">
+  <h2>Predictions</h2>
+  <span>Jerusalem</span>
+  <span>{{ currentWeather.Temperature.Metric.Value }}</span>
+  <div class="current-weather">{{ currentWeather.WeatherText }}</div>
+  <div class="future-predictions" fxLayout="row" fxLayoutAlign="center center">
+    <div *ngFor="let dayPrediction of predictions.DailyForecasts">
+      <div class="day-predictions card">
+        <span>
+          {{ dayPrediction.Temperature.Maximum.Value }}
+        </span>
+        <span>{{ dayPrediction.Temperature.Maximum.Unit }}</span>
+      </div>
+    </div>
+  </div>
+</div>
