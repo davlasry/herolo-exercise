@@ -1,21 +1,27 @@
-<div class="predictions-container card">
+<div class="predictions-container">
   <app-search-bar></app-search-bar>
-  <button mat-icon-button color="accent" (click)="removeFromFavorites()">
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button mat-icon-button color="accent" (click)="addToFavorites()">
-    <mat-icon>favorite_border</mat-icon>
-  </button>
-  <span>Jerusalem</span>
-  <span>{{ currentWeather.Temperature.Metric.Value }}</span>
-  <div class="current-weather">{{ currentWeather.WeatherText }}</div>
-  <div class="future-predictions" fxLayout="row" fxLayoutAlign="center center">
-    <div *ngFor="let dayPrediction of predictions.DailyForecasts">
-      <div class="day-predictions card">
-        <span>
-          {{ dayPrediction.Temperature.Maximum.Value }}
-        </span>
-        <span>{{ dayPrediction.Temperature.Maximum.Unit }}</span>
+  <div class="predictions-content card">
+    <button mat-icon-button color="accent" (click)="removeFromFavorites()">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button color="accent" (click)="addToFavorites()">
+      <mat-icon>favorite_border</mat-icon>
+    </button>
+    <span>Jerusalem</span>
+    <span>{{ currentWeather.Temperature.Metric.Value }}</span>
+    <div class="current-weather">{{ currentWeather.WeatherText }}</div>
+    <div
+      class="future-predictions"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+    >
+      <div *ngFor="let dayPrediction of predictions.DailyForecasts">
+        <div class="day-predictions card">
+          <span>
+            {{ dayPrediction.Temperature.Maximum.Value }}
+          </span>
+          <span>{{ dayPrediction.Temperature.Maximum.Unit }}</span>
+        </div>
       </div>
     </div>
   </div>
