@@ -13,6 +13,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
+import { StoreModule, MetaReducer } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+// not used in production
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
@@ -40,7 +46,9 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // StoreModule.forRoot({}, { metaReducers }),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]
