@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { environment } from './../environments/environment';
+
 import { AppRoutingModule } from './app-routing.module';
 
 // Angular Material Modules
@@ -26,6 +28,8 @@ import { PredictionsComponent } from './components/predictions/predictions.compo
 import { FavoritesListComponent } from './components/favorites-list/favorites-list.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 
+import { reducer } from './state/reducers/reducers';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,8 +51,9 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
-    // StoreModule.forRoot({}, { metaReducers }),
-    EffectsModule.forRoot([])
+    StoreModule.forRoot({}, { reducer }),
+    EffectsModule.forRoot([]),
+    environment.production ? [] : StoreDevtoolsModule.instrument()
   ],
   providers: [],
   bootstrap: [AppComponent]
