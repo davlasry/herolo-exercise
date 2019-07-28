@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { predictions } from 'src/app/mocks/5daysPredictions';
 import { currentWeather } from 'src/app/mocks/currentWeather';
 import { FavoritesService } from 'src/app/services/favorites.service';
+import { select, Store } from '@ngrx/store';
+import * as actions from '../../state/actions';
 
 @Component({
   selector: 'app-predictions',
@@ -14,7 +16,10 @@ export class PredictionsComponent implements OnInit {
   isCityInFavorites;
   city = 'jerusalem';
 
-  constructor(private favoritesService: FavoritesService) {}
+  constructor(
+    private favoritesService: FavoritesService,
+    private store: Store<any>
+  ) {}
 
   ngOnInit() {
     this.predictions = predictions;
@@ -27,12 +32,14 @@ export class PredictionsComponent implements OnInit {
     console.log('Add to favorites');
     this.favoritesService.addCityToFavorites(this.city);
     this.checkIfCityInFavorites();
+    this.store.dispatch(actions.addToFavorites({ city: this.city }));
   }
 
   removeFromFavorites() {
     console.log('Remove From favorites');
     this.favoritesService.removeCityFromFavorites(this.city);
     this.checkIfCityInFavorites();
+    this.store.dispatch(actions.removeFromFavorites({ city: this.city }));
   }
 
   checkIfCityInFavorites() {

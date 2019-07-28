@@ -28,7 +28,7 @@ import { PredictionsComponent } from './components/predictions/predictions.compo
 import { FavoritesListComponent } from './components/favorites-list/favorites-list.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 
-import { reducer } from './state/reducers/reducers';
+import { weatherReducer } from './state/reducers';
 
 @NgModule({
   declarations: [
@@ -51,7 +51,7 @@ import { reducer } from './state/reducers/reducers';
     MatIconModule,
     MatInputModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({}, { reducer }),
+    StoreModule.forRoot({ cities: weatherReducer }),
     EffectsModule.forRoot([]),
     environment.production ? [] : StoreDevtoolsModule.instrument()
   ],
