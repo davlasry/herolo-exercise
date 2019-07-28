@@ -37,6 +37,15 @@ export class FavoritesService {
       .pipe(map(movies => movies.results));
   }
 
+  searchCity(textInput) {
+    console.log('textInput:', textInput);
+    return this.http.get<any>(
+      `${this.API_BASE_URL}/locations/v1/cities/autocomplete?apikey=${
+        this.API_KEY
+      }&q=${textInput}`
+    );
+  }
+
   // getFavorites() {
   //   return this.favoriteCities;
   // }
