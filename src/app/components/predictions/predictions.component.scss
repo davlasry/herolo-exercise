@@ -5,14 +5,59 @@
     padding: 50px;
   }
 
+  .current-weather {
+    padding: 0 10px;
+
+    .main-temperature {
+      font-size: 52px;
+      font-weight: 700;
+
+      img {
+        margin-left: -15px;
+        height: 90px;
+      }
+    }
+
+    .city-name {
+      // font-weight: 700;
+      // letter-spacing: 1px;
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    .current-weather-text {
+      font-size: 14px;
+    }
+
+    .favorite-button {
+      ::ng-deep .mat-icon {
+        color: #ffffff;
+        font-size: 35px;
+      }
+    }
+  }
+
   .future-predictions {
     margin-top: 40px;
   }
 
   .day-predictions {
-    margin: 0 30px;
+    margin: 0 10px;
     min-width: 100px;
-    min-height: 200px;
+    min-height: 160px;
     padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+
+    .day-name {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .temperature-numbers {
+      .min-temperature {
+        color: #a0cbf9;
+      }
+    }
   }
 }

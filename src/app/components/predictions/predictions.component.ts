@@ -28,6 +28,14 @@ export class PredictionsComponent implements OnInit {
     this.checkIfCityInFavorites();
   }
 
+  getWeatherIconID(ID) {
+    if (ID < 10) {
+      return `0${ID}`;
+    } else {
+      return ID;
+    }
+  }
+
   addToFavorites() {
     console.log('Add to favorites');
     this.favoritesService.addCityToFavorites(this.city);

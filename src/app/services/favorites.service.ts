@@ -18,23 +18,21 @@ export class FavoritesService {
   constructor(private http: HttpClient) {}
 
   getFiveDaysPredictions(cityID) {
-    return this.http
-      .get<any>(
-        `${this.API_BASE_URL}/forecasts/v1/daily/5day/213225?apikey=${
-          this.API_KEY
-        }`
-      )
-      .pipe(map(movies => movies.results));
+    return this.http.get<any>(
+      `${this.API_BASE_URL}/forecasts/v1/daily/5day/${cityID}?apikey=${
+        this.API_KEY
+      }&metric=true`
+    );
+    // .pipe(map(movies => movies.results));
   }
 
   getCurrentWeather(cityID) {
-    return this.http
-      .get<any>(
-        `${this.API_BASE_URL}/currentconditions/v1/213225?apikey=${
-          this.API_KEY
-        }`
-      )
-      .pipe(map(movies => movies.results));
+    return this.http.get<any>(
+      `${this.API_BASE_URL}/currentconditions/v1/${cityID}?apikey=${
+        this.API_KEY
+      }`
+    );
+    // .pipe(map(movies => movies.results));
   }
 
   searchCity(textInput) {
@@ -45,10 +43,6 @@ export class FavoritesService {
       }&q=${textInput}`
     );
   }
-
-  // getFavorites() {
-  //   return this.favoriteCities;
-  // }
 
   addCityToFavorites(cityID) {
     this.favoriteCitiesArray.push(cityID);

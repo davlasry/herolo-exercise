@@ -1,9 +1,10 @@
 $menu-height: 60px;
+$header-color: #2382e2;
 
 .menu {
   height: $menu-height;
   width: 100%;
-  background-color: black;
+  background-color: white;
   position: fixed;
   top: 0;
   left: 0;
@@ -12,23 +13,24 @@ $menu-height: 60px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
 
   .title {
-    color: #ffffff;
+    color: $header-color;
     font-size: 20px;
     margin-right: 20px;
   }
 
   ul {
     height: 100%;
+    list-style: none;
 
     li {
       margin: 0 20px;
 
       &:hover a {
-        color: #ffffff;
+        color: #000000;
       }
 
       a {
-        color: #6f6f6f;
+        color: $header-color;
         font-size: 18px;
         font-weight: bold;
         line-height: $menu-height;
@@ -36,7 +38,7 @@ $menu-height: 60px;
       }
 
       .active {
-        color: #ffffff;
+        color: red;
         // font-weight: bold;
       }
     }

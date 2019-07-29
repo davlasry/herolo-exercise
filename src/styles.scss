@@ -1,6 +1,7 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
 
-$primary-color: #081c24;
+$primary-color: #ffffff;
 
 * {
   margin: 0;
@@ -8,8 +9,11 @@ $primary-color: #081c24;
 }
 
 body {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  background-color: #d2d2d2;
+  font-family: 'Montserrat', sans-serif;
+  background: #c9d6ff; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #60acfd, #1e7fe0);
+  background: linear-gradient(to top, #60acfd, #1e7fe0);
+
   height: 100vh;
   color: $primary-color;
 }

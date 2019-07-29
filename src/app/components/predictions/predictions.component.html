@@ -1,49 +1,103 @@
 <div class="predictions-container">
   <app-search-bar></app-search-bar>
-  <div class="predictions-content card">
-    <button
-      mat-icon-button
-      color="accent"
-      (click)="removeFromFavorites()"
-      *ngIf="isCityInFavorites"
+  <div class="predictions-content">
+    <div
+      class="current-weather"
+      fxLayout="row"
+      fxLayoutAlign="space-between start"
     >
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button
-      mat-icon-button
-      color="accent"
-      (click)="addToFavorites()"
-      *ngIf="!isCityInFavorites"
-    >
-      <mat-icon>favorite_border</mat-icon>
-    </button>
-    <span>Jerusalem</span>
-    <span>{{ currentWeather.Temperature.Metric.Value }}</span>
-    <div class="current-weather">{{ currentWeather.WeatherText }}</div>
+      <div class="right-part">
+        <div
+          class="location"
+          fxLayout="row"
+          fxLayoutAlign="space-between center"
+        >
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"
+              >location_on</mat-icon
+            > -->
+            <span class="city-name">Jerusalem</span>
+          </div>
+        </div>
+        <div class="current-weather-text">{{ currentWeather.WeatherText }}</div>
+
+        <div
+          class="main-temperature"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+        >
+          <span
+            >{{
+              currentWeather.Temperature.Metric.Value | number: '1.0-0'
+            }}°</span
+          >
+          <img
+            typeof="foaf:Image"
+            class="img-responsive"
+            src="https://developer.accuweather.com/sites/default/files/{{
+              getWeatherIconID(currentWeather.WeatherIcon)
+            }}-s.png"
+            alt=" {{ currentWeather.WeatherText }}"
+          />
+        </div>
+      </div>
+      <div class="left-part">
+        <div class="favorite-button">
+          <button
+            mat-icon-button
+            color="accent"
+            (click)="removeFromFavorites()"
+            *ngIf="isCityInFavorites"
+          >
+            <mat-icon>star</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="accent"
+            (click)="addToFavorites()"
+            *ngIf="!isCityInFavorites"
+          >
+            <mat-icon>star_border</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
     <div
       class="future-predictions"
       fxLayout="row"
       fxLayoutAlign="center center"
     >
       <div *ngFor="let dayPrediction of predictions.DailyForecasts">
-        <div class="day-predictions card">
-          <div class="max-temperature">
-            <span>
-              {{ dayPrediction.Temperature.Maximum.Value }}
-            </span>
-            <span>{{ dayPrediction.Temperature.Maximum.Unit }}</span>
+        <div
+          class="day-predictions"
+          fxLayout="column"
+          fxLayoutAlign="space-between center"
+        >
+          <div class="day-name">
+            {{ dayPrediction.Date | date: 'EEE' }}
           </div>
-          <div class="min-temperature">
-            <span>
-              {{ dayPrediction.Temperature.Minimum.Value }}
-            </span>
-            <span>{{ dayPrediction.Temperature.Minimum.Unit }}</span>
-          </div>
-          <div>
-            {{ dayPrediction.Date | date: 'EEEE' }}
-          </div>
-          <div>
+          <!-- <div>
             {{ dayPrediction.Day.IconPhrase }}
+          </div> -->
+          <img
+            typeof="foaf:Image"
+            class="img-responsive"
+            src="https://developer.accuweather.com/sites/default/files/{{
+              getWeatherIconID(dayPrediction.Day.Icon)
+            }}-s.png"
+            width="75"
+            height="45"
+            alt=" {{ dayPrediction.Day.IconPhrase }}"
+          />
+          <div class="temperature-numbers" fxLayout="row" fxLayoutGap="5px">
+            <div class="max-temperature">
+              <span> {{ dayPrediction.Temperature.Maximum.Value }}°</span>
+              <!-- <span>{{ dayPrediction.Temperature.Maximum.Unit }}</span> -->
+            </div>
+            <div class="min-temperature">
+              <span> {{ dayPrediction.Temperature.Minimum.Value }}°</span>
+              <!-- <span>{{ dayPrediction.Temperature.Minimum.Unit }}</span> -->
+            </div>
           </div>
         </div>
       </div>
