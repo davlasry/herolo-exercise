@@ -1,8 +1,15 @@
 <div class="favorites-list-container">
-  <div class="card">
+  <div class="">
     <h2>Favorites</h2>
-    <div *ngFor="let favorite of favorites">
+    <!-- <div *ngFor="let favorite of favorites">
       <app-favorite [favoriteData]="favorite"></app-favorite>
-    </div>
+    </div> -->
   </div>
+</div>
+
+<div *ngFor="let favorite of favorites$ | async">
+  <app-favorite [favoriteData]="favorite"></app-favorite>
+  <!-- <div>
+    {{ favorite }}
+  </div> -->
 </div>

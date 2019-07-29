@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FavoritesService } from 'src/app/services/favorites.service';
+import { Store, select } from '@ngrx/store';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-favorites-list',
@@ -8,8 +10,17 @@ import { FavoritesService } from 'src/app/services/favorites.service';
 })
 export class FavoritesListComponent implements OnInit {
   favorites;
+  favorites$;
 
-  constructor(private favoritesService: FavoritesService) {}
+  constructor(
+    private favoritesService: FavoritesService,
+    private store: Store<any>
+  ) {
+    this.favorites$ = store.pipe(
+      select(state => state.cities),
+      map(featureState => featureState.favorites)
+    );
+  }
 
   ngOnInit() {
     this.favoritesService.favoriteCities.subscribe(cities => {
