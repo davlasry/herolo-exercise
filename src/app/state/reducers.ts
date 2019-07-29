@@ -1,19 +1,26 @@
 import * as actions from './actions';
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, on, Action } from '@ngrx/store';
 
 export interface State {
-  // favorites: Favorite[]
+  currentWeather: any[];
   favorites: any[];
 }
 
 export const initialState: State = {
-  favorites: []
+  favorites: [],
+  currentWeather: []
 };
 
 export const weatherReducer = createReducer(
   initialState,
+  on(actions.setCurrentWeather, (state, { currentWeather }) => {
+    return { ...state, currentWeather };
+  }),
   on(actions.addToFavorites, (state, { city }) => {
-    return { ...state, favorites: [...state.favorites, city] };
+    return {
+      ...state,
+      favorites: [...state.favorites, city]
+    };
   }),
   on(actions.removeFromFavorites, (state, { city }) => {
     return {

@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { autocompleteSearch } from 'src/app/mocks/autocomplete';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { Store } from '@ngrx/store';
+import { getCurrentWeather } from 'src/app/state/actions';
 
 @Component({
   selector: 'app-search-bar',
@@ -26,7 +27,7 @@ export class SearchBarComponent implements OnInit {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       // startWith(''),
       map(value => {
-        console.log('value:', value);
+        // console.log('value:', value);
         return this._filter(value);
       })
     );
@@ -41,7 +42,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   displayFunction(option) {
-    console.log('option:', option);
+    // console.log('option:', option);
     if (!option) {
       return '';
     }
@@ -50,13 +51,13 @@ export class SearchBarComponent implements OnInit {
 
   onCitySelected(event) {
     console.log('event:', event);
-    const citySelected = event.option.value;
-    this.store.dispatch({ type: '[Weather] Get City Predictions' });
+    const citySelected = event.option.value.Key;
+    this.store.dispatch(getCurrentWeather({ city: citySelected }));
     console.log('citySelected:', citySelected);
   }
 
   private _filter(value: any): string[] {
-    console.log('value:', value);
+    // console.log('value:', value);
     let filterValue;
     if (value.LocalizedName) {
       filterValue = value.LocalizedName.toLowerCase();

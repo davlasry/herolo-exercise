@@ -1,6 +1,6 @@
 <div class="predictions-container">
   <app-search-bar></app-search-bar>
-  <div class="predictions-content">
+  <div class="predictions-content" *ngIf="currentWeather">
     <div
       class="current-weather"
       fxLayout="row"
@@ -76,9 +76,6 @@
           <div class="day-name">
             {{ dayPrediction.Date | date: 'EEE' }}
           </div>
-          <!-- <div>
-            {{ dayPrediction.Day.IconPhrase }}
-          </div> -->
           <img
             typeof="foaf:Image"
             class="img-responsive"
@@ -92,11 +89,9 @@
           <div class="temperature-numbers" fxLayout="row" fxLayoutGap="5px">
             <div class="max-temperature">
               <span> {{ dayPrediction.Temperature.Maximum.Value }}°</span>
-              <!-- <span>{{ dayPrediction.Temperature.Maximum.Unit }}</span> -->
             </div>
             <div class="min-temperature">
               <span> {{ dayPrediction.Temperature.Minimum.Value }}°</span>
-              <!-- <span>{{ dayPrediction.Temperature.Minimum.Unit }}</span> -->
             </div>
           </div>
         </div>
