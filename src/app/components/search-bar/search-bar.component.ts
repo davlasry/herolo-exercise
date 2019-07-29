@@ -24,8 +24,11 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
+      // startWith(''),
+      map(value => {
+        console.log('value:', value);
+        return this._filter(value);
+      })
     );
     // this.filteredOptions = this.myControl.valueChanges.pipe(
     //   // delay emits
@@ -37,14 +40,29 @@ export class SearchBarComponent implements OnInit {
     this.options = autocompleteSearch;
   }
 
+  displayFunction(option) {
+    console.log('option:', option);
+    if (!option) {
+      return '';
+    }
+    return option.LocalizedName;
+  }
+
   onCitySelected(event) {
+    console.log('event:', event);
     const citySelected = event.option.value;
     this.store.dispatch({ type: '[Weather] Get City Predictions' });
     console.log('citySelected:', citySelected);
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  private _filter(value: any): string[] {
+    console.log('value:', value);
+    let filterValue;
+    if (value.LocalizedName) {
+      filterValue = value.LocalizedName.toLowerCase();
+    } else {
+      filterValue = value.toLowerCase();
+    }
 
     return this.options.filter(option => {
       return option.LocalizedName.toLowerCase().includes(filterValue);

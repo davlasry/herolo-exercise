@@ -16,6 +16,7 @@ $header-color: #2382e2;
     color: $header-color;
     font-size: 20px;
     margin-right: 20px;
+    font-weight: 700;
   }
 
   ul {
@@ -26,11 +27,11 @@ $header-color: #2382e2;
       margin: 0 20px;
 
       &:hover a {
-        color: #000000;
+        color: $header-color;
       }
 
       a {
-        color: $header-color;
+        color: #85aad0;
         font-size: 18px;
         font-weight: bold;
         line-height: $menu-height;
@@ -38,7 +39,7 @@ $header-color: #2382e2;
       }
 
       .active {
-        color: red;
+        color: $header-color;
         // font-weight: bold;
       }
     }

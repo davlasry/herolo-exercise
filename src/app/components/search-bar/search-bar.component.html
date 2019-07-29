@@ -16,10 +16,11 @@
       <mat-autocomplete
         #auto="matAutocomplete"
         (optionSelected)="onCitySelected($event)"
+        [displayWith]="displayFunction"
       >
         <mat-option
           *ngFor="let option of filteredOptions | async"
-          [value]="option.LocalizedName"
+          [value]="option"
         >
           {{ option.LocalizedName }}
         </mat-option>

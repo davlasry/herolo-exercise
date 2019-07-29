@@ -3,22 +3,23 @@ import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError } from 'rxjs/operators';
 import { FavoritesService } from '../services/favorites.service';
+import { addToFavorites, getCurrentWeather } from './actions';
 
-// @Injectable()
-// export class WeatherEffects {
-//   randomAdd = createEffect(() =>
-//     this.actions.pipe(
-//       ofType(randomAdd),
-//       mapToAction({
-//         project: () =>
-//           generateValue().pipe(map(value => add({ payload: { value } }))),
-//         error: message => logInfo(message)
-//       })
-//     )
-//   );
+@Injectable()
+export class WeatherEffects {
+  getCurrentWeather$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getCurrentWeather),
+      mergeMap(() =>
+        this.favoritesService
+          .getCurrentWeather('Paris')
+          .pipe(map(res => addToFavorites({ city: res })))
+      )
+    )
+  );
 
-//   constructor(
-//     private actions: Actions,
-//     private favoritesService: FavoritesService
-//   ) {}
-// }
+  constructor(
+    private actions$: Actions,
+    private favoritesService: FavoritesService
+  ) {}
+}
