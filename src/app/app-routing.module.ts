@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
 import { FavoritesListComponent } from './components/favorites-list/favorites-list.component';
 import { PredictionsComponent } from './components/predictions/predictions.component';
 

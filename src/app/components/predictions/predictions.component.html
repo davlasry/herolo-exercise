@@ -1,5 +1,6 @@
 <div class="predictions-container">
   <app-search-bar></app-search-bar>
+
   <div class="predictions-content" *ngIf="currentWeather">
     <div
       class="current-weather"
@@ -13,9 +14,6 @@
           fxLayoutAlign="space-between center"
         >
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-            <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"
-              >location_on</mat-icon
-            > -->
             <span class="city-name">{{ currentCity?.LocalizedName }}</span>
           </div>
         </div>
@@ -32,36 +30,20 @@
             }}°</span
           >
           <img
-            typeof="foaf:Image"
-            class="img-responsive"
             src="https://developer.accuweather.com/sites/default/files/{{
               getWeatherIconID(currentWeather.WeatherIcon)
             }}-s.png"
-            alt=" {{ currentWeather.WeatherText }}"
+            [alt]="currentWeather.WeatherText"
+            [title]="currentWeather.WeatherText"
           />
         </div>
       </div>
+
       <div class="left-part">
-        <div class="favorite-button">
-          <button
-            mat-icon-button
-            color="accent"
-            (click)="removeFromFavorites()"
-            *ngIf="isCityInFavorites"
-          >
-            <mat-icon>star</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            color="accent"
-            (click)="addToFavorites()"
-            *ngIf="!isCityInFavorites"
-          >
-            <mat-icon>star_border</mat-icon>
-          </button>
-        </div>
+        <app-favorite-button></app-favorite-button>
       </div>
     </div>
+
     <div
       class="future-predictions"
       fxLayout="row"
@@ -77,21 +59,18 @@
             {{ dayPrediction.Date | date: 'EEE' }}
           </div>
           <img
-            typeof="foaf:Image"
-            class="img-responsive"
             src="https://developer.accuweather.com/sites/default/files/{{
               getWeatherIconID(dayPrediction.Day.Icon)
             }}-s.png"
-            width="75"
-            height="45"
-            alt=" {{ dayPrediction.Day.IconPhrase }}"
+            [alt]="dayPrediction.Day.IconPhrase"
+            [title]="dayPrediction.Day.IconPhrase"
           />
           <div class="temperature-numbers" fxLayout="row" fxLayoutGap="5px">
             <div class="max-temperature">
-              <span> {{ dayPrediction.Temperature.Maximum.Value }}°</span>
+              <span>{{ dayPrediction.Temperature.Maximum.Value }}°</span>
             </div>
             <div class="min-temperature">
-              <span> {{ dayPrediction.Temperature.Minimum.Value }}°</span>
+              <span>{{ dayPrediction.Temperature.Minimum.Value }}°</span>
             </div>
           </div>
         </div>
