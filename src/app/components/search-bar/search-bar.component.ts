@@ -5,7 +5,8 @@ import { Observable, of } from 'rxjs';
 import { autocompleteSearch } from 'src/app/mocks/autocomplete';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { Store } from '@ngrx/store';
-import { getCurrentWeather } from 'src/app/state/actions';
+import { getCurrentWeather, setCurrentWeather } from 'src/app/state/actions';
+import { currentWeather } from 'src/app/mocks/currentWeather';
 
 @Component({
   selector: 'app-search-bar',
@@ -25,24 +26,16 @@ export class SearchBarComponent implements OnInit {
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
-      // startWith(''),
-      map(value => {
-        // console.log('value:', value);
-        return this._filter(value);
-      })
+      // delay emits
+      debounceTime(600),
+      // use switch map so as to cancel previous subscribed events, before creating new once
+      switchMap(query => this.favoritesService.searchCity(query))
     );
-    // this.filteredOptions = this.myControl.valueChanges.pipe(
-    //   // delay emits
-    //   debounceTime(600),
-    //   // use switch map so as to cancel previous subscribed events, before creating new once
-    //   switchMap(query => this.favoritesService.searchCity(query))
-    // );
 
     this.options = autocompleteSearch;
   }
 
   displayFunction(option) {
-    // console.log('option:', option);
     if (!option) {
       return '';
     }
@@ -51,13 +44,12 @@ export class SearchBarComponent implements OnInit {
 
   onCitySelected(event) {
     console.log('event:', event);
-    const citySelected = event.option.value.Key;
+    const citySelected = event.option.value;
     this.store.dispatch(getCurrentWeather({ city: citySelected }));
     console.log('citySelected:', citySelected);
   }
 
   private _filter(value: any): string[] {
-    // console.log('value:', value);
     let filterValue;
     if (value.LocalizedName) {
       filterValue = value.LocalizedName.toLowerCase();

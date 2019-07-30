@@ -4,7 +4,7 @@ import { currentWeather } from 'src/app/mocks/currentWeather';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { select, Store } from '@ngrx/store';
 import * as actions from '../../state/actions';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-predictions',
@@ -14,8 +14,11 @@ import { map } from 'rxjs/operators';
 export class PredictionsComponent implements OnInit {
   predictions;
   currentWeather;
+  currentCity = {
+    Key: '215854',
+    LocalizedName: 'Tel Aviv'
+  };
   isCityInFavorites;
-  cityID = '215854';
 
   constructor(
     private favoritesService: FavoritesService,
@@ -24,23 +27,29 @@ export class PredictionsComponent implements OnInit {
     store
       .pipe(
         select(state => state.weatherState.currentWeather)
-        // map(featureState => featureState)
+        // filter(value => !!value)
       )
       .subscribe(currentWeatherResult => {
         if (currentWeatherResult) {
           this.currentWeather = currentWeatherResult;
-          console.log('this.currentWeather:', this.currentWeather);
+        }
+      });
+
+    store
+      .pipe(select(state => state.weatherState.currentCity))
+      .subscribe(currentCityResult => {
+        if (currentCityResult) {
+          this.currentCity = currentCityResult;
         }
       });
   }
 
   ngOnInit() {
-    // this.store.dispatch(actions.getCurrentWeather({ city: this.cityID }));
-    this.checkIfCityInFavorites();
-
+    this.store.dispatch(actions.getCurrentWeather({ city: this.currentCity }));
+    // this.checkIfCityInFavorites();
+    console.log('ngOnInit');
+    this.store.dispatch(actions.getPredictions({ city: this.currentCity }));
     this.predictions = predictions;
-
-    this.currentWeather = currentWeather[0];
   }
 
   getWeatherIconID(ID) {
@@ -53,21 +62,23 @@ export class PredictionsComponent implements OnInit {
 
   addToFavorites() {
     console.log('Add to favorites');
-    this.favoritesService.addCityToFavorites(this.cityID);
+    this.favoritesService.addCityToFavorites(this.currentCity);
     this.checkIfCityInFavorites();
-    this.store.dispatch(actions.addToFavorites({ city: this.cityID }));
+    this.store.dispatch(actions.addToFavorites({ city: this.currentCity }));
   }
 
   removeFromFavorites() {
     console.log('Remove From favorites');
-    this.favoritesService.removeCityFromFavorites(this.cityID);
+    this.favoritesService.removeCityFromFavorites(this.currentCity);
     this.checkIfCityInFavorites();
-    this.store.dispatch(actions.removeFromFavorites({ city: this.cityID }));
+    this.store.dispatch(
+      actions.removeFromFavorites({ city: this.currentCity })
+    );
   }
 
   checkIfCityInFavorites() {
     this.isCityInFavorites = this.favoritesService.isCityInFavorites(
-      this.cityID
+      this.currentCity
     );
   }
 }

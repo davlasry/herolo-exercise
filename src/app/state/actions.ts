@@ -7,7 +7,17 @@ export const getCurrentWeather = createAction(
 
 export const setCurrentWeather = createAction(
   'Set Current Weather',
-  props<{ currentWeather: any }>()
+  props<{ currentWeather: any; currentCity: any }>()
+);
+
+export const getPredictions = createAction(
+  'Get Predictions Weather',
+  props<{ city: any }>()
+);
+
+export const setPredictions = createAction(
+  'Get Predictions Weather',
+  props<{ predictions: any }>()
 );
 
 export const addToFavorites = createAction(

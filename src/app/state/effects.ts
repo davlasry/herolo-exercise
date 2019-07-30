@@ -1,28 +1,46 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import { map, mergeMap, catchError, concatMap } from 'rxjs/operators';
 import { FavoritesService } from '../services/favorites.service';
 import {
-  addToFavorites,
   getCurrentWeather,
-  setCurrentWeather
+  setCurrentWeather,
+  getPredictions,
+  setPredictions
 } from './actions';
 
 @Injectable()
 export class WeatherEffects {
   getCurrentWeather$ = createEffect(() => {
-    console.log('inside effect');
+    console.log('getCurrentWeather effect');
     return this.actions$.pipe(
       ofType(getCurrentWeather),
-      mergeMap(({ city }) =>
-        this.favoritesService.getCurrentWeather(city).pipe(
+      concatMap(({ city }) => {
+        return this.favoritesService.getCurrentWeather(city.Key).pipe(
           map(res => {
-            console.log('res:', res);
-            return setCurrentWeather({ currentWeather: res[0] });
+            return setCurrentWeather({
+              currentWeather: res[0],
+              currentCity: city
+            });
           })
-        )
-      )
+        );
+      })
+    );
+  });
+
+  getPredictions$ = createEffect(() => {
+    console.log('getPredictions effect');
+    return this.actions$.pipe(
+      ofType(getPredictions),
+      concatMap(({ city }) => {
+        return this.favoritesService.getFiveDaysPredictions(city.Key).pipe(
+          map(predictions => {
+            console.log('predictions:', predictions);
+            return setPredictions({ predictions });
+          })
+        );
+      })
     );
   });
 

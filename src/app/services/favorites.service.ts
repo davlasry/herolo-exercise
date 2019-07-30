@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class FavoritesService {
   private API_BASE_URL = 'http://dataservice.accuweather.com';
-  private API_KEY = 'MVu5tD8P1Pzp0kGZfdIhuIVuqGrxtYns';
+  private API_KEY = '9Qj8JUuV4jSur8p2FfosAH0yTZmByj4p';
 
   private favoriteCitiesSource = new BehaviorSubject<any[]>([]);
   favoriteCities = this.favoriteCitiesSource.asObservable();
