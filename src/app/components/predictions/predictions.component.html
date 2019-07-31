@@ -14,7 +14,9 @@
           fxLayoutAlign="space-between center"
         >
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-            <span class="city-name">{{ currentCity?.LocalizedName }}</span>
+            <span class="city-name">{{
+              (currentCity$ | async)?.LocalizedName
+            }}</span>
           </div>
         </div>
         <div class="current-weather-text">{{ currentWeather.WeatherText }}</div>
@@ -40,7 +42,10 @@
       </div>
 
       <div class="left-part">
-        <app-favorite-button></app-favorite-button>
+        <app-favorite-button
+          [isFavorite]="isCurrentCityInFavorites"
+          (favoriteButtonToggled)="onFavoriteButtonToggled($event)"
+        ></app-favorite-button>
       </div>
     </div>
 

@@ -1,7 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { predictions } from 'src/app/mocks/5daysPredictions';
 import { select, Store } from '@ngrx/store';
 import * as actions from '../../state/actions';
+import { Observable } from 'rxjs';
+import {
+  getFavoritesKeys,
+  getFavorites,
+  getWeatherState
+} from 'src/app/state/reducers';
 
 @Component({
   selector: 'app-predictions',
@@ -11,10 +16,9 @@ import * as actions from '../../state/actions';
 export class PredictionsComponent implements OnInit {
   predictions$;
   currentWeather;
-  currentCity = {
-    Key: '215854',
-    LocalizedName: 'Tel Aviv'
-  };
+  currentCity$: Observable<any>;
+  currentCity: any;
+  isCurrentCityInFavorites$;
 
   constructor(private store: Store<any>) {
     store
@@ -25,30 +29,40 @@ export class PredictionsComponent implements OnInit {
         }
       });
 
-    store
-      .pipe(select(state => state.weatherState.currentCity))
-      .subscribe(currentCityResult => {
-        if (currentCityResult) {
-          this.currentCity = currentCityResult;
-        }
-      });
+    this.currentCity$ = store.pipe(
+      select(state => state.weatherState.currentCity)
+    );
+
+    this.isCurrentCityInFavorites$ = store.pipe(select(getWeatherState));
+    this.isCurrentCityInFavorites$.subscribe(res => {
+      console.log(res);
+    });
+
+    this.currentCity$.subscribe(currentCity => {
+      this.currentCity = currentCity;
+
+      this.store.dispatch(
+        actions.getCurrentWeather({ city: this.currentCity })
+      );
+      this.store.dispatch(actions.getPredictions({ city: this.currentCity }));
+    });
 
     this.predictions$ = store.pipe(
       select(state => state.weatherState.predictions)
     );
-    // .subscribe(predictionsResult => {
-    //   if (predictionsResult) {
-    //     this.predictions = predictionsResult;
-    //   }
-    // });
   }
 
-  ngOnInit() {
-    this.store.dispatch(actions.getCurrentWeather({ city: this.currentCity }));
-    this.store.dispatch(actions.getPredictions({ city: this.currentCity }));
-  }
+  ngOnInit() {}
 
   getWeatherIconID(ID) {
     return ID < 10 ? `0${ID}` : ID;
+  }
+
+  onFavoriteButtonToggled(isCityFavorite) {
+    if (isCityFavorite) {
+      this.store.dispatch(actions.addToFavorites());
+    } else {
+      this.store.dispatch(actions.removeFromFavorites());
+    }
   }
 }

@@ -20,11 +20,7 @@ export const setPredictions = createAction(
   props<{ predictions: any }>()
 );
 
-export const addToFavorites = createAction(
-  'Add Location To Favorites',
-  props<{ city: any }>()
-);
+export const addToFavorites = createAction('Add Location To Favorites');
 export const removeFromFavorites = createAction(
-  'Remove Location From Favorites',
-  props<{ city: any }>()
+  'Remove Location From Favorites'
 );

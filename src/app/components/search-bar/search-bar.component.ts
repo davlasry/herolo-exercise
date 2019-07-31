@@ -2,14 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, startWith, switchMap, debounceTime } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
-import { autocompleteSearch } from 'src/app/mocks/autocomplete';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { Store } from '@ngrx/store';
-import {
-  getCurrentWeather,
-  setCurrentWeather,
-  getPredictions
-} from 'src/app/state/actions';
+import { getCurrentWeather, getPredictions } from 'src/app/state/actions';
 
 @Component({
   selector: 'app-search-bar',
@@ -18,7 +13,7 @@ import {
 })
 export class SearchBarComponent implements OnInit {
   queryStringControl = new FormControl();
-  options: any[] = autocompleteSearch;
+  options: any[];
   filteredOptions: Observable<string[]>;
   citiesAutoComplete$: Observable<any> = null;
 
@@ -37,8 +32,6 @@ export class SearchBarComponent implements OnInit {
 
     // initialize queryString formcontrol
     // this.queryStringControl.setValue("");
-
-    this.options = autocompleteSearch;
   }
 
   displayFunction(option) {

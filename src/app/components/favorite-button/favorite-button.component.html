@@ -1,9 +1,19 @@
 <div class="favorite-button-container">
   <div class="favorite-button">
-    <button mat-icon-button color="accent">
+    <button
+      mat-icon-button
+      color="accent"
+      *ngIf="isFavorite"
+      (click)="onFavoriteButtonClick(false)"
+    >
       <mat-icon>star</mat-icon>
     </button>
-    <button mat-icon-button color="accent">
+    <button
+      mat-icon-button
+      color="accent"
+      *ngIf="!isFavorite"
+      (click)="onFavoriteButtonClick(true)"
+    >
       <mat-icon>star_border</mat-icon>
     </button>
   </div>
