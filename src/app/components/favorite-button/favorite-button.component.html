@@ -3,7 +3,7 @@
     <button
       mat-icon-button
       color="accent"
-      *ngIf="isFavorite"
+      *ngIf="isCurrentCityInFavorites"
       (click)="onFavoriteButtonClick(false)"
     >
       <mat-icon>star</mat-icon>
@@ -11,10 +11,12 @@
     <button
       mat-icon-button
       color="accent"
-      *ngIf="!isFavorite"
+      *ngIf="!isCurrentCityInFavorites"
       (click)="onFavoriteButtonClick(true)"
     >
       <mat-icon>star_border</mat-icon>
     </button>
+
+    <!-- <div>{{ isCurrentCityInFavorites }}</div> -->
   </div>
 </div>

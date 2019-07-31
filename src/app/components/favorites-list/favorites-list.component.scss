@@ -1,7 +1,15 @@
 .favorites-list-container {
-  min-width: 500px;
+  min-width: 800px;
   min-height: 100px;
   margin-top: 50px;
+
+  .title {
+    margin: 0 0 30px 10px;
+  }
+
+  .no-favorite {
+    margin-left: 10px;
+  }
 
   .card {
     padding: 50px;

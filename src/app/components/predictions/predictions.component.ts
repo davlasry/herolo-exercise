@@ -3,9 +3,9 @@ import { select, Store } from '@ngrx/store';
 import * as actions from '../../state/actions';
 import { Observable } from 'rxjs';
 import {
-  getFavoritesKeys,
-  getFavorites,
-  getWeatherState
+  getWeatherState,
+  getCurrentCity,
+  isCurrentCityInFavorites
 } from 'src/app/state/reducers';
 
 @Component({
@@ -17,7 +17,11 @@ export class PredictionsComponent implements OnInit {
   predictions$;
   currentWeather;
   currentCity$: Observable<any>;
-  currentCity: any;
+  currentCity: any = {
+    Key: null
+  };
+  currentCityFromStore: any;
+  currentCityFromStore$: any;
   isCurrentCityInFavorites$;
 
   constructor(private store: Store<any>) {
@@ -33,12 +37,17 @@ export class PredictionsComponent implements OnInit {
       select(state => state.weatherState.currentCity)
     );
 
-    this.isCurrentCityInFavorites$ = store.pipe(select(getWeatherState));
-    this.isCurrentCityInFavorites$.subscribe(res => {
+    this.isCurrentCityInFavorites$ = store.pipe(
+      select(isCurrentCityInFavorites)
+    );
+
+    this.currentCityFromStore$ = store.pipe(select(getCurrentCity));
+    this.currentCityFromStore$.subscribe(res => {
       console.log(res);
     });
 
     this.currentCity$.subscribe(currentCity => {
+      console.log('currentCity:', currentCity);
       this.currentCity = currentCity;
 
       this.store.dispatch(
@@ -59,10 +68,11 @@ export class PredictionsComponent implements OnInit {
   }
 
   onFavoriteButtonToggled(isCityFavorite) {
+    // console.log('isCityFavorite:', isCityFavorite);
     if (isCityFavorite) {
-      this.store.dispatch(actions.addToFavorites());
+      this.store.dispatch(actions.addToFavorites(this.currentCity));
     } else {
-      this.store.dispatch(actions.removeFromFavorites());
+      this.store.dispatch(actions.removeFromFavorites(this.currentCity));
     }
   }
 }

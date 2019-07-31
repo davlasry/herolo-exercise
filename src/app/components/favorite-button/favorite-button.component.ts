@@ -6,7 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./favorite-button.component.scss']
 })
 export class FavoriteButtonComponent implements OnInit {
-  @Input() isFavorite;
+  @Input() isCurrentCityInFavorites;
   @Output() favoriteButtonToggled = new EventEmitter();
 
   constructor() {}

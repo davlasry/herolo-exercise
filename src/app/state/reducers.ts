@@ -54,22 +54,37 @@ export function reducer(state: State | undefined, action: Action) {
 
 export const getWeatherState = createFeatureSelector<any>('weatherState');
 
-// export const getWeatherState = (state: any) => state.weatherState;
-export const getFavorites = (state: State) => state.favorites;
+export const getFavorites = createSelector(
+  getWeatherState,
+  state => {
+    console.log('favorites:', state.favorites);
+    return state.favorites;
+  }
+);
+// export const getCurrentCity = (state: State) => state.currentCity;
 
 export const getFavoritesKeys = createSelector(
   getFavorites,
-  state => {
-    console.log('favorites:', state);
-    return state;
+  favorites => {
+    console.log('favorites:', favorites);
+    return favorites.map(favorite => favorite.Key);
     // favorites.map(favorite => favorite.Key);
   }
 );
 
-// export const isCurrentCityInFavorites = createSelector(
-//   getFavoritesKeys,
-//   getCurrentCityKey,
-//   (keys, currentKey) => {
-//     return !!currentKey && keys.indexOf(currentKey) > -1;
-//   }
-// );
+export const getCurrentCity = createSelector(
+  getWeatherState,
+  state => {
+    console.log('currentCity:', state.currentCity);
+    return state.currentCity.Key;
+    // favorites.map(favorite => favorite.Key);
+  }
+);
+
+export const isCurrentCityInFavorites = createSelector(
+  getFavoritesKeys,
+  getCurrentCity,
+  (keys, currentCityKey) => {
+    return !!currentCityKey && !!keys && keys.indexOf(currentCityKey) > -1;
+  }
+);

@@ -1,5 +1,31 @@
 <div class="favorite-container">
-  <div class="">
-    {{ favoriteData }}
+  <!-- <div class="">
+    {{ favoriteData.Key }}
+    {{ favoriteData.LocalizedName }}
+  </div> -->
+
+  <div
+    class="favorite-city"
+    fxLayout="column"
+    fxLayoutAlign="space-between center"
+  >
+    <div class="favorite-city-name">
+      {{ favoriteData.LocalizedName }}
+    </div>
+    <!-- <img
+      src="https://developer.accuweather.com/sites/default/files/{{
+        getWeatherIconID(dayPrediction.Day.Icon)
+      }}-s.png"
+      [alt]="dayPrediction.Day.IconPhrase"
+      [title]="dayPrediction.Day.IconPhrase"
+    />
+    <div class="temperature-numbers" fxLayout="row" fxLayoutGap="5px">
+      <div class="max-temperature">
+        <span>{{ dayPrediction.Temperature.Maximum.Value }}°</span>
+      </div>
+      <div class="min-temperature">
+        <span>{{ dayPrediction.Temperature.Minimum.Value }}°</span>
+      </div>
+    </div> -->
   </div>
 </div>

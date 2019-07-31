@@ -1,12 +1,18 @@
 <div class="favorites-list-container">
   <div class="">
-    <h2>Favorites</h2>
-    <!-- <div *ngFor="let favorite of favorites">
-      <app-favorite [favoriteData]="favorite"></app-favorite>
-    </div> -->
+    <h2 class="title">My favorite cities</h2>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="start center"
+      *ngIf="(favorites$ | async).length"
+    >
+      <app-favorite
+        *ngFor="let favorite of favorites$ | async"
+        [favoriteData]="favorite"
+      ></app-favorite>
+    </div>
+    <div class="no-favorite" *ngIf="(favorites$ | async).length === 0">
+      No favorites
+    </div>
   </div>
 </div>
-
-<!-- <div *ngFor="let favorite of favorites$ | async">
-  <app-favorite [favoriteData]="favorite"></app-favorite>
-</div> -->
