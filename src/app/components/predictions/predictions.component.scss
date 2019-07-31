@@ -19,21 +19,12 @@
     }
 
     .city-name {
-      // font-weight: 700;
-      // letter-spacing: 1px;
       font-size: 22px;
       margin-bottom: 5px;
     }
 
     .current-weather-text {
       font-size: 14px;
-    }
-
-    .favorite-button {
-      ::ng-deep .mat-icon {
-        color: #ffffff;
-        font-size: 35px;
-      }
     }
   }
 

@@ -12,20 +12,12 @@ export class FavoritesListComponent implements OnInit {
   favorites;
   favorites$;
 
-  constructor(
-    private favoritesService: FavoritesService,
-    private store: Store<any>
-  ) {
+  constructor(private store: Store<any>) {
     this.favorites$ = store.pipe(
       select(state => state.cities),
       map(featureState => featureState.favorites)
     );
   }
 
-  ngOnInit() {
-    this.favoritesService.favoriteCities.subscribe(cities => {
-      console.log('cities:', cities);
-      this.favorites = cities;
-    });
-  }
+  ngOnInit() {}
 }

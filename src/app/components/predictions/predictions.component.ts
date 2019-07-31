@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { predictions } from 'src/app/mocks/5daysPredictions';
-import { FavoritesService } from 'src/app/services/favorites.service';
 import { select, Store } from '@ngrx/store';
 import * as actions from '../../state/actions';
-import { map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-predictions',
@@ -17,12 +15,8 @@ export class PredictionsComponent implements OnInit {
     Key: '215854',
     LocalizedName: 'Tel Aviv'
   };
-  isCityInFavorites;
 
-  constructor(
-    private favoritesService: FavoritesService,
-    private store: Store<any>
-  ) {
+  constructor(private store: Store<any>) {
     store
       .pipe(select(state => state.weatherState.currentWeather))
       .subscribe(currentWeatherResult => {
@@ -55,30 +49,6 @@ export class PredictionsComponent implements OnInit {
   }
 
   getWeatherIconID(ID) {
-    if (ID < 10) {
-      return `0${ID}`;
-    } else {
-      return ID;
-    }
-  }
-
-  addToFavorites() {
-    this.favoritesService.addCityToFavorites(this.currentCity);
-    this.checkIfCityInFavorites();
-    this.store.dispatch(actions.addToFavorites({ city: this.currentCity }));
-  }
-
-  removeFromFavorites() {
-    this.favoritesService.removeCityFromFavorites(this.currentCity);
-    this.checkIfCityInFavorites();
-    this.store.dispatch(
-      actions.removeFromFavorites({ city: this.currentCity })
-    );
-  }
-
-  checkIfCityInFavorites() {
-    this.isCityInFavorites = this.favoritesService.isCityInFavorites(
-      this.currentCity
-    );
+    return ID < 10 ? `0${ID}` : ID;
   }
 }

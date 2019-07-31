@@ -10,11 +10,6 @@ export class FavoritesService {
   private API_BASE_URL = 'http://dataservice.accuweather.com';
   private API_KEY = '9Qj8JUuV4jSur8p2FfosAH0yTZmByj4p';
 
-  private favoriteCitiesSource = new BehaviorSubject<any[]>([]);
-  favoriteCities = this.favoriteCitiesSource.asObservable();
-
-  private favoriteCitiesArray = [];
-
   constructor(private http: HttpClient) {}
 
   getFiveDaysPredictions(cityID) {
@@ -43,22 +38,5 @@ export class FavoritesService {
         this.API_KEY
       }&q=${textInput}`
     );
-  }
-
-  addCityToFavorites(cityID) {
-    this.favoriteCitiesArray.push(cityID);
-    this.favoriteCitiesSource.next(this.favoriteCitiesArray);
-  }
-
-  removeCityFromFavorites(cityID) {
-    this.favoriteCitiesArray.splice(
-      this.favoriteCitiesArray.indexOf(cityID),
-      1
-    );
-    this.favoriteCitiesSource.next(this.favoriteCitiesArray);
-  }
-
-  isCityInFavorites(cityID) {
-    return this.favoriteCitiesArray.indexOf(cityID) !== -1;
   }
 }
