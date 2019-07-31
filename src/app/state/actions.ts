@@ -21,6 +21,7 @@ export const setPredictions = createAction(
 );
 
 export const addToFavorites = createAction('Add Location To Favorites');
+
 export const removeFromFavorites = createAction(
   'Remove Location From Favorites'
 );

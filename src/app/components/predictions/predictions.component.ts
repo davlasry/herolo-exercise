@@ -70,9 +70,9 @@ export class PredictionsComponent implements OnInit {
   onFavoriteButtonToggled(isCityFavorite) {
     // console.log('isCityFavorite:', isCityFavorite);
     if (isCityFavorite) {
-      this.store.dispatch(actions.addToFavorites(this.currentCity));
+      this.store.dispatch(actions.addToFavorites());
     } else {
-      this.store.dispatch(actions.removeFromFavorites(this.currentCity));
+      this.store.dispatch(actions.removeFromFavorites());
     }
   }
 }
