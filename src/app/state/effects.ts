@@ -13,7 +13,6 @@ import {
 @Injectable()
 export class WeatherEffects {
   getCurrentWeather$ = createEffect(() => {
-    console.log('getCurrentWeather effect');
     return this.actions$.pipe(
       ofType(getCurrentWeather),
       concatMap(({ city }) => {
@@ -30,13 +29,11 @@ export class WeatherEffects {
   });
 
   getPredictions$ = createEffect(() => {
-    console.log('getPredictions effect');
     return this.actions$.pipe(
       ofType(getPredictions),
       concatMap(({ city }) => {
         return this.favoritesService.getFiveDaysPredictions(city.Key).pipe(
           map(predictions => {
-            console.log('predictions:', predictions);
             return setPredictions({ predictions });
           })
         );

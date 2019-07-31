@@ -18,6 +18,7 @@ export class FavoritesService {
   constructor(private http: HttpClient) {}
 
   getFiveDaysPredictions(cityID) {
+    console.log('SERVICE getFiveDaysPredictions cityID:', cityID);
     return this.http.get<any>(
       `${this.API_BASE_URL}/forecasts/v1/daily/5day/${cityID}?apikey=${
         this.API_KEY
@@ -27,12 +28,12 @@ export class FavoritesService {
   }
 
   getCurrentWeather(cityID) {
+    console.log('SERVICE getCurrentWeather cityID:', cityID);
     return this.http.get<any>(
       `${this.API_BASE_URL}/currentconditions/v1/${cityID}?apikey=${
         this.API_KEY
       }`
     );
-    // .pipe(map(movies => movies.results));
   }
 
   searchCity(textInput) {

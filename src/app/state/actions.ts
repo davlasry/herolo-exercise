@@ -16,7 +16,7 @@ export const getPredictions = createAction(
 );
 
 export const setPredictions = createAction(
-  'Get Predictions Weather',
+  'Set Predictions Weather',
   props<{ predictions: any }>()
 );
 

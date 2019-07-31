@@ -21,7 +21,6 @@ export const weatherReducer = createReducer(
     return { ...state, currentWeather, currentCity };
   }),
   on(actions.setPredictions, (state, { predictions }) => {
-    console.log('predictions:', predictions);
     return { ...state, predictions };
   }),
   on(actions.addToFavorites, (state, { city }) => {

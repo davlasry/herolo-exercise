@@ -5,8 +5,11 @@ import { Observable, of } from 'rxjs';
 import { autocompleteSearch } from 'src/app/mocks/autocomplete';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { Store } from '@ngrx/store';
-import { getCurrentWeather, setCurrentWeather } from 'src/app/state/actions';
-import { currentWeather } from 'src/app/mocks/currentWeather';
+import {
+  getCurrentWeather,
+  setCurrentWeather,
+  getPredictions
+} from 'src/app/state/actions';
 
 @Component({
   selector: 'app-search-bar',
@@ -14,7 +17,7 @@ import { currentWeather } from 'src/app/mocks/currentWeather';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
-  myControl = new FormControl();
+  queryStringControl = new FormControl();
   options: any[] = autocompleteSearch;
   filteredOptions: Observable<string[]>;
   citiesAutoComplete$: Observable<any> = null;
@@ -25,12 +28,15 @@ export class SearchBarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    this.filteredOptions = this.queryStringControl.valueChanges.pipe(
       // delay emits
       debounceTime(600),
       // use switch map so as to cancel previous subscribed events, before creating new once
       switchMap(query => this.favoritesService.searchCity(query))
     );
+
+    // initialize queryString formcontrol
+    // this.queryStringControl.setValue("");
 
     this.options = autocompleteSearch;
   }
@@ -43,22 +49,8 @@ export class SearchBarComponent implements OnInit {
   }
 
   onCitySelected(event) {
-    console.log('event:', event);
     const citySelected = event.option.value;
     this.store.dispatch(getCurrentWeather({ city: citySelected }));
-    console.log('citySelected:', citySelected);
-  }
-
-  private _filter(value: any): string[] {
-    let filterValue;
-    if (value.LocalizedName) {
-      filterValue = value.LocalizedName.toLowerCase();
-    } else {
-      filterValue = value.toLowerCase();
-    }
-
-    return this.options.filter(option => {
-      return option.LocalizedName.toLowerCase().includes(filterValue);
-    });
+    this.store.dispatch(getPredictions({ city: citySelected }));
   }
 }

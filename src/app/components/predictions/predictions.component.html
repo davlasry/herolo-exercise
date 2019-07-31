@@ -67,7 +67,7 @@
       fxLayout="row"
       fxLayoutAlign="center center"
     >
-      <div *ngFor="let dayPrediction of predictions.DailyForecasts">
+      <div *ngFor="let dayPrediction of (predictions$ | async).DailyForecasts">
         <div
           class="day-predictions"
           fxLayout="column"

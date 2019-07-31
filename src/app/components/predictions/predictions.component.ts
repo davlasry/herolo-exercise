@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { predictions } from 'src/app/mocks/5daysPredictions';
-import { currentWeather } from 'src/app/mocks/currentWeather';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { select, Store } from '@ngrx/store';
 import * as actions from '../../state/actions';
@@ -12,7 +11,7 @@ import { map, filter } from 'rxjs/operators';
   styleUrls: ['./predictions.component.scss']
 })
 export class PredictionsComponent implements OnInit {
-  predictions;
+  predictions$;
   currentWeather;
   currentCity = {
     Key: '215854',
@@ -25,10 +24,7 @@ export class PredictionsComponent implements OnInit {
     private store: Store<any>
   ) {
     store
-      .pipe(
-        select(state => state.weatherState.currentWeather)
-        // filter(value => !!value)
-      )
+      .pipe(select(state => state.weatherState.currentWeather))
       .subscribe(currentWeatherResult => {
         if (currentWeatherResult) {
           this.currentWeather = currentWeatherResult;
@@ -42,14 +38,20 @@ export class PredictionsComponent implements OnInit {
           this.currentCity = currentCityResult;
         }
       });
+
+    this.predictions$ = store.pipe(
+      select(state => state.weatherState.predictions)
+    );
+    // .subscribe(predictionsResult => {
+    //   if (predictionsResult) {
+    //     this.predictions = predictionsResult;
+    //   }
+    // });
   }
 
   ngOnInit() {
     this.store.dispatch(actions.getCurrentWeather({ city: this.currentCity }));
-    // this.checkIfCityInFavorites();
-    console.log('ngOnInit');
     this.store.dispatch(actions.getPredictions({ city: this.currentCity }));
-    this.predictions = predictions;
   }
 
   getWeatherIconID(ID) {
@@ -61,14 +63,12 @@ export class PredictionsComponent implements OnInit {
   }
 
   addToFavorites() {
-    console.log('Add to favorites');
     this.favoritesService.addCityToFavorites(this.currentCity);
     this.checkIfCityInFavorites();
     this.store.dispatch(actions.addToFavorites({ city: this.currentCity }));
   }
 
   removeFromFavorites() {
-    console.log('Remove From favorites');
     this.favoritesService.removeCityFromFavorites(this.currentCity);
     this.checkIfCityInFavorites();
     this.store.dispatch(
