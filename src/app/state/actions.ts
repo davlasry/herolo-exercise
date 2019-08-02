@@ -1,5 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 
+export const setCurrentCity = createAction(
+  'Set Current City',
+  props<{ city: any }>()
+);
+
 export const getCurrentWeather = createAction(
   'Get Current Weather',
   props<{ city: any }>()

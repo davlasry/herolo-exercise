@@ -4,13 +4,13 @@
     {{ favoriteData.LocalizedName }}
   </div> -->
 
-  <div
-    class="favorite-city"
-    fxLayout="column"
-    fxLayoutAlign="space-between center"
-  >
+  <div class="favorite-city" fxLayout="column" fxLayoutAlign="start center">
     <div class="favorite-city-name">
       {{ favoriteData.LocalizedName }}
+    </div>
+    <div class="favorite-country">{{ favoriteData.Country.LocalizedName }}</div>
+    <div class="see-more" fxLayout="column" fxLayoutAlign="center center">
+      <a routerLink="/" (click)="onWatchWeatherLink()">Watch weather</a>
     </div>
     <!-- <img
       src="https://developer.accuweather.com/sites/default/files/{{

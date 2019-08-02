@@ -9,11 +9,24 @@
   .favorite-city-name {
     font-weight: 700;
     font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .favorite-country {
+    text-transform: uppercase;
+    margin-bottom: 20px;
   }
 
   .temperature-numbers {
     .min-temperature {
       color: #a0cbf9;
     }
+  }
+
+  .see-more {
+    text-align: center;
+    cursor: pointer;
+    font-size: 12px;
+    text-decoration: underline;
   }
 }

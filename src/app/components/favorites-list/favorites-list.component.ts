@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FavoritesService } from 'src/app/services/favorites.service';
 import { Store, select } from '@ngrx/store';
 import { getFavorites } from 'src/app/state/reducers';
+import * as actions from '../../state/actions';
 
 @Component({
   selector: 'app-favorites-list',
@@ -21,4 +21,11 @@ export class FavoritesListComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  onFavoriteClick(favoriteData) {
+    console.log('favoriteKey:', favoriteData);
+    this.store.dispatch(actions.getCurrentWeather({ city: favoriteData }));
+    this.store.dispatch(actions.getPredictions({ city: favoriteData }));
+    this.store.dispatch(actions.setCurrentCity({ city: favoriteData }));
+  }
 }

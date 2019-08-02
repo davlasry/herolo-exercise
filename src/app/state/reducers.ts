@@ -19,7 +19,10 @@ export const initialState: State = {
   currentWeather: null,
   currentCity: {
     Key: '215854',
-    LocalizedName: 'Tel Aviv'
+    LocalizedName: 'Tel Aviv',
+    Country: {
+      LocalizedName: 'Israel'
+    }
   },
   predictions: null
 };

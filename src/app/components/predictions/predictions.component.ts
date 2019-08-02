@@ -3,7 +3,6 @@ import { select, Store } from '@ngrx/store';
 import * as actions from '../../state/actions';
 import { Observable } from 'rxjs';
 import {
-  getWeatherState,
   getCurrentCity,
   isCurrentCityInFavorites
 } from 'src/app/state/reducers';

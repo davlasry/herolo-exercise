@@ -4,7 +4,11 @@ import { map, startWith, switchMap, debounceTime } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { Store } from '@ngrx/store';
-import { getCurrentWeather, getPredictions } from 'src/app/state/actions';
+import {
+  getCurrentWeather,
+  getPredictions,
+  setCurrentCity
+} from 'src/app/state/actions';
 
 @Component({
   selector: 'app-search-bar',
@@ -45,5 +49,6 @@ export class SearchBarComponent implements OnInit {
     const citySelected = event.option.value;
     this.store.dispatch(getCurrentWeather({ city: citySelected }));
     this.store.dispatch(getPredictions({ city: citySelected }));
+    this.store.dispatch(setCurrentCity({ city: citySelected }));
   }
 }

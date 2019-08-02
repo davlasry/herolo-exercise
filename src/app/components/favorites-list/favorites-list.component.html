@@ -9,6 +9,7 @@
       <app-favorite
         *ngFor="let favorite of favorites$ | async"
         [favoriteData]="favorite"
+        (favoriteClicked)="onFavoriteClick($event)"
       ></app-favorite>
     </div>
     <div class="no-favorite" *ngIf="(favorites$ | async).length === 0">
