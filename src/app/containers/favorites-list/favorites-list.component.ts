@@ -14,18 +14,11 @@ export class FavoritesListComponent implements OnInit {
 
   constructor(private store: Store<any>) {
     this.favorites$ = store.pipe(select(getFavorites));
-
-    this.favorites$.subscribe(res => {
-      console.log('res:', res);
-    });
   }
 
   ngOnInit() {}
 
   onFavoriteClick(favoriteData) {
-    console.log('favoriteKey:', favoriteData);
-    this.store.dispatch(actions.getCurrentWeather({ city: favoriteData }));
-    this.store.dispatch(actions.getPredictions({ city: favoriteData }));
     this.store.dispatch(actions.setCurrentCity({ city: favoriteData }));
   }
 }
