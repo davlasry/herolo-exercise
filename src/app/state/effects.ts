@@ -52,7 +52,6 @@ export class WeatherEffects {
     return this.actions$.pipe(
       ofType(setCurrentCity),
       switchMap(({ city }) => {
-        console.log('city:', city);
         return [getPredictions({ city }), getCurrentWeather({ city })];
       })
     );

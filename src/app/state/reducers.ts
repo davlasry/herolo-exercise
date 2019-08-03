@@ -69,16 +69,13 @@ export const getWeatherState = createFeatureSelector<any>('weatherState');
 export const getFavorites = createSelector(
   getWeatherState,
   state => {
-    console.log('favorites:', state.favorites);
     return state.favorites;
   }
 );
-// export const getCurrentCity = (state: State) => state.currentCity;
 
 export const getFavoritesKeys = createSelector(
   getFavorites,
   favorites => {
-    console.log('favorites:', favorites);
     return favorites.map(favorite => favorite.Key);
   }
 );
@@ -86,7 +83,6 @@ export const getFavoritesKeys = createSelector(
 export const getCurrentCity = createSelector(
   getWeatherState,
   state => {
-    console.log('currentCity:', state.currentCity);
     return state.currentCity;
   }
 );
@@ -95,8 +91,6 @@ export const isCurrentCityInFavorites = createSelector(
   getFavoritesKeys,
   getCurrentCity,
   (keys, currentCity) => {
-    console.log('keys:', keys);
-    // console.log('currentCity:', currentCity);
     return !!currentCity && !!keys && keys.indexOf(currentCity.Key) > -1;
   }
 );
