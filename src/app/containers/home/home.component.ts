@@ -7,6 +7,14 @@ import {
 } from 'src/app/state/reducers';
 import * as actions from '../../state/actions';
 
+const defaultCurrentCity = {
+  Key: '215854',
+  LocalizedName: 'Tel Aviv',
+  Country: {
+    LocalizedName: 'Israel'
+  }
+};
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,13 +29,6 @@ export class HomeComponent implements OnInit {
   isCurrentCityInFavorites$;
   isCurrentWeatherLoading$: Observable<boolean>;
   isPredictionsLoading$: Observable<boolean>;
-  defaultCurrentCity = {
-    Key: '215854',
-    LocalizedName: 'Tel Aviv',
-    Country: {
-      LocalizedName: 'Israel'
-    }
-  };
 
   constructor(private store: Store<any>) {
     this.currentWeather$ = store.pipe(
@@ -57,7 +58,7 @@ export class HomeComponent implements OnInit {
     this.currentCity$.subscribe(currentCity => {
       if (!currentCity) {
         this.store.dispatch(
-          actions.setCurrentCity({ city: this.defaultCurrentCity })
+          actions.setCurrentCity({ city: defaultCurrentCity })
         );
       }
     });
@@ -68,7 +69,6 @@ export class HomeComponent implements OnInit {
   }
 
   onFavoriteButtonToggled(isCityFavorite) {
-    // console.log('isCityFavorite:', isCityFavorite);
     if (isCityFavorite) {
       this.store.dispatch(actions.addToFavorites());
     } else {
