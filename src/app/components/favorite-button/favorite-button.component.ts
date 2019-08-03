@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-favorite-button',
@@ -6,10 +6,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./favorite-button.component.scss']
 })
 export class FavoriteButtonComponent {
-  @Input() isCurrentCityInFavorites;
+  @Input() isCurrentCityInFavorites: boolean;
   @Output() favoriteButtonToggled = new EventEmitter();
 
-  onFavoriteButtonClick(newStatus) {
+  // Emit event with new status (add or remove to/from favorites)
+  onFavoriteButtonClick(newStatus: boolean): void {
     this.favoriteButtonToggled.emit(newStatus);
   }
 }

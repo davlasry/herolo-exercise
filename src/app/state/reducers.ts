@@ -6,17 +6,18 @@ import {
   createSelector,
   createFeatureSelector
 } from '@ngrx/store';
+import { IPredictions } from '../interfaces/predictions';
 
-export interface State {
+export interface AppState {
   currentWeather: any[];
   isCurrentWeatherLoading: boolean;
-  predictions: any;
+  predictions: IPredictions;
   isPredictionsLoading: boolean;
   currentCity: any;
   favorites: any[];
 }
 
-export const initialState: State = {
+export const initialState: AppState = {
   favorites: [],
   currentWeather: null,
   isCurrentWeatherLoading: false,
@@ -60,10 +61,11 @@ export const weatherReducer = createReducer(
   })
 );
 
-export function reducer(state: State | undefined, action: Action) {
+export function reducer(state: AppState | undefined, action: Action) {
   return weatherReducer(state, action);
 }
 
+// Selectors
 export const getWeatherState = createFeatureSelector<any>('weatherState');
 
 export const getFavorites = createSelector(

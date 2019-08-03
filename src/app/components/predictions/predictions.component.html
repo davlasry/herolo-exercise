@@ -5,7 +5,7 @@
   fxLayoutAlign.lt-md="center center"
 >
   <div
-    *ngFor="let dayPrediction of (predictions$ | async)?.DailyForecasts"
+    *ngFor="let dayPrediction of predictions?.DailyForecasts"
     class="day-predictions"
     fxLayout="column"
     fxLayoutAlign="space-between center"

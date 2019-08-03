@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ICity } from 'src/app/interfaces/city';
 
 @Component({
   selector: 'app-favorite',
@@ -6,10 +7,5 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./favorite.component.scss']
 })
 export class FavoriteComponent {
-  @Input() favoriteData;
-  @Output() favoriteClicked = new EventEmitter();
-
-  onWatchWeatherLink() {
-    this.favoriteClicked.emit(this.favoriteData);
-  }
+  @Input() favoriteData: ICity;
 }

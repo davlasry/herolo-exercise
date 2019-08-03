@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import {
-  map,
-  startWith,
   switchMap,
   debounceTime,
   tap,
@@ -13,6 +11,7 @@ import { Observable, of } from 'rxjs';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { Store } from '@ngrx/store';
 import { setCurrentCity } from 'src/app/state/actions';
+import { ICity } from 'src/app/interfaces/city';
 
 @Component({
   selector: 'app-search-bar',
@@ -21,10 +20,9 @@ import { setCurrentCity } from 'src/app/state/actions';
 })
 export class SearchBarComponent implements OnInit {
   queryStringControl = new FormControl();
-  options: any[];
+  options: ICity[];
   filteredOptions$: Observable<string[]>;
   filteredOptions = [];
-  citiesAutoComplete$: Observable<any> = null;
   isLoading = false;
 
   constructor(
@@ -33,6 +31,7 @@ export class SearchBarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // On each input change, receive the options for autocompletion
     this.filteredOptions$ = this.queryStringControl.valueChanges.pipe(
       tap(query => {
         if (query) {
@@ -48,19 +47,21 @@ export class SearchBarComponent implements OnInit {
       })
     );
 
-    this.filteredOptions$.subscribe(res => {
+    this.filteredOptions$.subscribe((res: string[]) => {
       this.filteredOptions = res;
     });
   }
 
-  displayFunction(option) {
+  // Returns the name of the city from the city object
+  displayFunction(option: ICity | null): string {
     if (!option) {
       return '';
     }
     return option.LocalizedName;
   }
 
-  onCitySelected(event) {
+  // When option is clicked in autocomplete, updates the current city in the store
+  onCitySelected(event): void {
     const citySelected = event.option.value;
     if (citySelected) {
       this.store.dispatch(setCurrentCity({ city: citySelected }));

@@ -1,13 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
-import {
-  map,
-  mergeMap,
-  catchError,
-  concatMap,
-  switchMap
-} from 'rxjs/operators';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { map, concatMap, switchMap } from 'rxjs/operators';
 import { FavoritesService } from '../services/favorites.service';
 import {
   getCurrentWeather,

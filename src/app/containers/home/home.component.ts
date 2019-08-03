@@ -3,11 +3,15 @@ import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import {
   isCurrentCityInFavorites,
-  getCurrentCity
+  getCurrentCity,
+  AppState
 } from 'src/app/state/reducers';
 import * as actions from '../../state/actions';
+import { IPredictions } from 'src/app/interfaces/predictions';
+import { ICurrentWeather } from 'src/app/interfaces/currentWeather';
+import { ICity } from 'src/app/interfaces/city';
 
-const defaultCurrentCity = {
+const defaultCurrentCity: ICity = {
   Key: '215854',
   LocalizedName: 'Tel Aviv',
   Country: {
@@ -21,18 +25,17 @@ const defaultCurrentCity = {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  predictions$;
-  currentWeather$: Observable<any>;
-  currentCity$: Observable<any>;
-  currentCityFromStore: any;
-  currentCityFromStore$: any;
-  isCurrentCityInFavorites$;
+  predictions$: Observable<IPredictions>;
+  currentWeather$: Observable<ICurrentWeather[]>;
+  currentCity$: Observable<ICity>;
+  isCurrentCityInFavorites$: Observable<boolean>;
   isCurrentWeatherLoading$: Observable<boolean>;
   isPredictionsLoading$: Observable<boolean>;
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<AppState>) {
+    // Subscribtions to the store
     this.currentWeather$ = store.pipe(
-      select(state => state.weatherState.currentWeather)
+      select((state: any) => state.weatherState.currentWeather)
     );
 
     this.currentCity$ = store.pipe(select(getCurrentCity));
@@ -42,19 +45,20 @@ export class HomeComponent implements OnInit {
     );
 
     this.predictions$ = store.pipe(
-      select(state => state.weatherState.predictions)
+      select((state: any) => state.weatherState.predictions)
     );
 
     this.isCurrentWeatherLoading$ = store.pipe(
-      select(state => state.weatherState.isCurrentWeatherLoading)
+      select((state: any) => state.weatherState.isCurrentWeatherLoading)
     );
 
     this.isPredictionsLoading$ = store.pipe(
-      select(state => state.weatherState.isPredictionsLoading)
+      select((state: any) => state.weatherState.isPredictionsLoading)
     );
   }
 
   ngOnInit() {
+    // If no current city, set the current city to Tel Aviv
     this.currentCity$.subscribe(currentCity => {
       if (!currentCity) {
         this.store.dispatch(
@@ -64,11 +68,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getWeatherIconID(ID) {
-    return ID < 10 ? `0${ID}` : ID;
+  // Add '0' before digits smaller than 10
+  getWeatherIconID(ID: number): string {
+    return ID < 10 ? `0${ID}` : `${ID}`;
   }
 
-  onFavoriteButtonToggled(isCityFavorite) {
+  // Check the received event from the button and dispatch the correct action
+  onFavoriteButtonToggled(isCityFavorite: boolean): void {
     if (isCityFavorite) {
       this.store.dispatch(actions.addToFavorites());
     } else {
