@@ -4,7 +4,7 @@
     <div
       fxLayout="row wrap"
       fxLayoutAlign="center center"
-      *ngIf="(favorites$ | async).length"
+      *ngIf="(favorites$ | async)?.length"
     >
       <app-favorite
         *ngFor="let favorite of favorites$ | async"
@@ -12,7 +12,7 @@
         (favoriteClicked)="onFavoriteClick($event)"
       ></app-favorite>
     </div>
-    <div class="no-favorite" *ngIf="(favorites$ | async).length === 0">
+    <div class="no-favorite" *ngIf="(favorites$ | async)?.length === 0">
       No favorites
     </div>
   </div>
