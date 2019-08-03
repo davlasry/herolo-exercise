@@ -1,0 +1,52 @@
+:host {
+  height: 100%;
+  width: 100%;
+}
+
+.predictions-container {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 900px;
+
+  .loading-container {
+    height: 100%;
+  }
+
+  .predictions-content {
+    padding: 50px 8%;
+  }
+
+  .future-predictions {
+    margin-top: 40px;
+  }
+
+  .current-weather {
+    padding: 0 10px;
+  }
+
+  .day-predictions {
+    margin: 0 10px;
+    width: 120px;
+    min-height: 160px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+
+    .day-name {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .temperature-numbers {
+      .min-temperature {
+        color: #a0cbf9;
+      }
+    }
+  }
+}
+
+::ng-deep .mat-progress-spinner circle {
+  stroke: #ffd20f;
+  stroke-width: 6% !important;
+}

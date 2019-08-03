@@ -14,6 +14,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatBadgeModule } from '@angular/material/badge';
 
 // NgRx modules
 import { StoreModule } from '@ngrx/store';
@@ -26,22 +28,26 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { PredictionsComponent } from './components/predictions/predictions.component';
-import { FavoritesListComponent } from './components/favorites-list/favorites-list.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 
 import { reducer } from './state/reducers';
 import { WeatherEffects } from './state/effects';
 import { FavoriteButtonComponent } from './components/favorite-button/favorite-button.component';
+import { CurrentWeatherComponent } from './components/current-weather/current-weather.component';
+import { FavoritesListComponent } from './containers/favorites-list/favorites-list.component';
+import { HomeComponent } from './containers/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    CurrentWeatherComponent,
     FavoritesListComponent,
     FavoriteComponent,
+    FavoriteButtonComponent,
     HeaderComponent,
+    HomeComponent,
     PredictionsComponent,
-    SearchBarComponent,
-    FavoriteButtonComponent
+    SearchBarComponent
   ],
   imports: [
     AppRoutingModule,
@@ -51,9 +57,11 @@ import { FavoriteButtonComponent } from './components/favorite-button/favorite-b
     FormsModule,
     HttpClientModule,
     MatAutocompleteModule,
+    MatBadgeModule,
     MatButtonModule,
     MatIconModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ weatherState: reducer }),
     EffectsModule.forRoot([WeatherEffects]),

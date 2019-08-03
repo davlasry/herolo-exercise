@@ -1,31 +1,13 @@
 <div class="favorite-container">
-  <!-- <div class="">
-    {{ favoriteData.Key }}
-    {{ favoriteData.LocalizedName }}
-  </div> -->
-
-  <div class="favorite-city" fxLayout="column" fxLayoutAlign="start center">
+  <a
+    class="favorite-city"
+    fxLayout="column"
+    fxLayoutAlign="space-around center"
+    routerLink="/"
+  >
     <div class="favorite-city-name">
       {{ favoriteData.LocalizedName }}
     </div>
     <div class="favorite-country">{{ favoriteData.Country.LocalizedName }}</div>
-    <div class="see-more" fxLayout="column" fxLayoutAlign="center center">
-      <a routerLink="/" (click)="onWatchWeatherLink()">Watch weather</a>
-    </div>
-    <!-- <img
-      src="https://developer.accuweather.com/sites/default/files/{{
-        getWeatherIconID(dayPrediction.Day.Icon)
-      }}-s.png"
-      [alt]="dayPrediction.Day.IconPhrase"
-      [title]="dayPrediction.Day.IconPhrase"
-    />
-    <div class="temperature-numbers" fxLayout="row" fxLayoutGap="5px">
-      <div class="max-temperature">
-        <span>{{ dayPrediction.Temperature.Maximum.Value }}°</span>
-      </div>
-      <div class="min-temperature">
-        <span>{{ dayPrediction.Temperature.Minimum.Value }}°</span>
-      </div>
-    </div> -->
-  </div>
+  </a>
 </div>

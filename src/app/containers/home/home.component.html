@@ -1,0 +1,42 @@
+<div class="predictions-container">
+  <app-search-bar></app-search-bar>
+
+  <div
+    class="loading-container"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    *ngIf="
+      (isCurrentWeatherLoading$ | async) || (isPredictionsLoading$ | async);
+      else loaded
+    "
+  >
+    <mat-spinner diameter="200"></mat-spinner>
+  </div>
+
+  <ng-template #loaded>
+    <div class="predictions-content">
+      <div
+        class="current-weather"
+        fxLayout="row"
+        fxLayoutAlign="space-between start"
+      >
+        <div class="right-part">
+          <app-current-weather
+            [currentWeather]="currentWeather$ | async"
+            [currentCity]="currentCity$ | async"
+            [isCurrentWeatherLoading]="isCurrentWeatherLoading$ | async"
+          ></app-current-weather>
+        </div>
+
+        <div class="left-part">
+          <app-favorite-button
+            [isCurrentCityInFavorites]="isCurrentCityInFavorites$ | async"
+            (favoriteButtonToggled)="onFavoriteButtonToggled($event)"
+          ></app-favorite-button>
+        </div>
+      </div>
+
+      <app-predictions></app-predictions>
+    </div>
+  </ng-template>
+</div>

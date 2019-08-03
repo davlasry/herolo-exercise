@@ -1,32 +1,36 @@
-.favorite-city {
-  margin: 0 10px;
-  width: 120px;
-  min-height: 160px;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
+.favorite-container {
+  text-align: center;
 
-  .favorite-city-name {
-    font-weight: 700;
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-
-  .favorite-country {
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .temperature-numbers {
-    .min-temperature {
-      color: #a0cbf9;
-    }
-  }
-
-  .see-more {
-    text-align: center;
+  .favorite-city {
+    margin: 10px;
+    width: 120px;
+    height: 150px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: all 0.2s ease;
     cursor: pointer;
-    font-size: 12px;
-    text-decoration: underline;
+
+    .favorite-city-name {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .favorite-country {
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .temperature-numbers {
+      .min-temperature {
+        color: #a0cbf9;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 0 7px 3px rgba(0, 41, 84, 0.1);
+      transition: all 0.2s ease;
+    }
   }
 }

@@ -17,6 +17,7 @@ $header-color: #2382e2;
     font-size: 20px;
     margin-right: 20px;
     font-weight: 700;
+    text-align: center;
   }
 
   ul {
@@ -34,13 +35,16 @@ $header-color: #2382e2;
         color: #85aad0;
         font-size: 18px;
         font-weight: bold;
-        line-height: $menu-height;
+        // line-height: $menu-height;
         display: inline-block;
+
+        ::ng-deep .mat-badge-content {
+          background-color: #ffd20f;
+        }
       }
 
       .active {
         color: $header-color;
-        // font-weight: bold;
       }
     }
   }

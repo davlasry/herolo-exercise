@@ -2,8 +2,8 @@
   <div class="">
     <h2 class="title">My favorite cities</h2>
     <div
-      fxLayout="row"
-      fxLayoutAlign="start center"
+      fxLayout="row wrap"
+      fxLayoutAlign="center center"
       *ngIf="(favorites$ | async).length"
     >
       <app-favorite

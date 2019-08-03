@@ -3,6 +3,7 @@
   fxLayout="column"
   fxLayoutAlign="center center"
 >
+  <!-- <div>loading: {{ isLoading }}</div> -->
   <form class="example-form">
     <mat-form-field class="example-full-width">
       <input
@@ -13,18 +14,20 @@
         [formControl]="queryStringControl"
         [matAutocomplete]="auto"
       />
-      <mat-autocomplete
-        #auto="matAutocomplete"
-        (optionSelected)="onCitySelected($event)"
-        [displayWith]="displayFunction"
-      >
-        <mat-option
-          *ngFor="let option of filteredOptions | async"
-          [value]="option"
-        >
-          {{ option.LocalizedName }}
-        </mat-option>
-      </mat-autocomplete>
     </mat-form-field>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="onCitySelected($event)"
+      [displayWith]="displayFunction"
+    >
+      <mat-option *ngIf="isLoading" fxLayout="row" fxLayoutAlign="center center"
+        ><mat-spinner diameter="20"></mat-spinner
+      ></mat-option>
+      <ng-container *ngIf="!isLoading">
+        <mat-option *ngFor="let option of filteredOptions" [value]="option">
+          {{ option?.LocalizedName }}
+        </mat-option>
+      </ng-container>
+    </mat-autocomplete>
   </form>
 </div>

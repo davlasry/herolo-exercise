@@ -9,31 +9,40 @@ import {
 
 export interface State {
   currentWeather: any[];
-  currentCity: any;
+  isCurrentWeatherLoading: boolean;
   predictions: any;
+  isPredictionsLoading: boolean;
+  currentCity: any;
   favorites: any[];
 }
 
 export const initialState: State = {
   favorites: [],
   currentWeather: null,
-  currentCity: {
-    Key: '215854',
-    LocalizedName: 'Tel Aviv',
-    Country: {
-      LocalizedName: 'Israel'
-    }
-  },
-  predictions: null
+  isCurrentWeatherLoading: false,
+  predictions: null,
+  isPredictionsLoading: false,
+  currentCity: null
 };
 
 export const weatherReducer = createReducer(
   initialState,
+  on(actions.getCurrentWeather, state => {
+    return { ...state, isCurrentWeatherLoading: true };
+  }),
   on(actions.setCurrentWeather, (state, { currentWeather, currentCity }) => {
-    return { ...state, currentWeather, currentCity };
+    return {
+      ...state,
+      currentWeather,
+      currentCity,
+      isCurrentWeatherLoading: false
+    };
+  }),
+  on(actions.getPredictions, state => {
+    return { ...state, isPredictionsLoading: true };
   }),
   on(actions.setPredictions, (state, { predictions }) => {
-    return { ...state, predictions };
+    return { ...state, predictions, isPredictionsLoading: false };
   }),
   on(actions.addToFavorites, state => {
     return {
@@ -71,7 +80,6 @@ export const getFavoritesKeys = createSelector(
   favorites => {
     console.log('favorites:', favorites);
     return favorites.map(favorite => favorite.Key);
-    // favorites.map(favorite => favorite.Key);
   }
 );
 
@@ -79,15 +87,23 @@ export const getCurrentCity = createSelector(
   getWeatherState,
   state => {
     console.log('currentCity:', state.currentCity);
-    return state.currentCity.Key;
-    // favorites.map(favorite => favorite.Key);
+    return state.currentCity;
   }
 );
 
 export const isCurrentCityInFavorites = createSelector(
   getFavoritesKeys,
   getCurrentCity,
-  (keys, currentCityKey) => {
-    return !!currentCityKey && !!keys && keys.indexOf(currentCityKey) > -1;
+  (keys, currentCity) => {
+    console.log('keys:', keys);
+    // console.log('currentCity:', currentCity);
+    return !!currentCity && !!keys && keys.indexOf(currentCity.Key) > -1;
+  }
+);
+
+export const getNumberOfFavorites = createSelector(
+  getFavorites,
+  favorites => {
+    return favorites.length;
   }
 );

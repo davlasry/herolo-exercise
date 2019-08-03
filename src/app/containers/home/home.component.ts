@@ -1,18 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-import * as actions from '../../state/actions';
+import { Store, select } from '@ngrx/store';
 import {
-  getCurrentCity,
-  isCurrentCityInFavorites
+  isCurrentCityInFavorites,
+  getCurrentCity
 } from 'src/app/state/reducers';
+import * as actions from '../../state/actions';
 
 @Component({
-  selector: 'app-predictions',
-  templateUrl: './predictions.component.html',
-  styleUrls: ['./predictions.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class PredictionsComponent implements OnInit {
+export class HomeComponent implements OnInit {
   predictions$;
   currentWeather$: Observable<any>;
   currentCity$: Observable<any>;

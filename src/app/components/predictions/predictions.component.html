@@ -1,84 +1,31 @@
-<div class="predictions-container">
-  <app-search-bar></app-search-bar>
-
-  <div class="predictions-content" *ngIf="currentWeather">
-    <div
-      class="current-weather"
-      fxLayout="row"
-      fxLayoutAlign="space-between start"
-    >
-      <div class="right-part">
-        <div
-          class="location"
-          fxLayout="row"
-          fxLayoutAlign="space-between center"
-        >
-          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-            <span class="city-name">{{
-              (currentCity$ | async)?.LocalizedName
-            }}</span>
-          </div>
-        </div>
-        <div class="current-weather-text">{{ currentWeather.WeatherText }}</div>
-
-        <div
-          class="main-temperature"
-          fxLayout="row"
-          fxLayoutAlign="start center"
-        >
-          <span
-            >{{
-              currentWeather.Temperature.Metric.Value | number: '1.0-0'
-            }}°</span
-          >
-          <img
-            src="https://developer.accuweather.com/sites/default/files/{{
-              getWeatherIconID(currentWeather.WeatherIcon)
-            }}-s.png"
-            [alt]="currentWeather.WeatherText"
-            [title]="currentWeather.WeatherText"
-          />
-        </div>
-      </div>
-
-      <div class="left-part">
-        <app-favorite-button
-          [isCurrentCityInFavorites]="isCurrentCityInFavorites$ | async"
-          (favoriteButtonToggled)="onFavoriteButtonToggled($event)"
-        ></app-favorite-button>
-      </div>
+<div
+  class="future-predictions"
+  fxLayout="row wrap"
+  fxLayoutAlign="space-between center"
+  fxLayoutAlign.lt-md="center center"
+>
+  <div
+    *ngFor="let dayPrediction of (predictions$ | async)?.DailyForecasts"
+    class="day-predictions"
+    fxLayout="column"
+    fxLayoutAlign="space-between center"
+  >
+    <div class="day-name">
+      {{ dayPrediction.Date | date: 'EEE' }}
     </div>
-
-    <div
-      class="future-predictions"
-      fxLayout="row"
-      fxLayoutAlign="center center"
-    >
-      <div *ngFor="let dayPrediction of (predictions$ | async)?.DailyForecasts">
-        <div
-          class="day-predictions"
-          fxLayout="column"
-          fxLayoutAlign="space-between center"
-        >
-          <div class="day-name">
-            {{ dayPrediction.Date | date: 'EEE' }}
-          </div>
-          <img
-            src="https://developer.accuweather.com/sites/default/files/{{
-              getWeatherIconID(dayPrediction.Day.Icon)
-            }}-s.png"
-            [alt]="dayPrediction.Day.IconPhrase"
-            [title]="dayPrediction.Day.IconPhrase"
-          />
-          <div class="temperature-numbers" fxLayout="row" fxLayoutGap="5px">
-            <div class="max-temperature">
-              <span>{{ dayPrediction.Temperature.Maximum.Value }}°</span>
-            </div>
-            <div class="min-temperature">
-              <span>{{ dayPrediction.Temperature.Minimum.Value }}°</span>
-            </div>
-          </div>
-        </div>
+    <img
+      src="https://developer.accuweather.com/sites/default/files/{{
+        getWeatherIconID(dayPrediction.Day.Icon)
+      }}-s.png"
+      [alt]="dayPrediction.Day.IconPhrase"
+      [title]="dayPrediction.Day.IconPhrase"
+    />
+    <div class="temperature-numbers" fxLayout="row" fxLayoutGap="5px">
+      <div class="max-temperature">
+        <span>{{ dayPrediction.Temperature.Maximum.Value }}°</span>
+      </div>
+      <div class="min-temperature">
+        <span>{{ dayPrediction.Temperature.Minimum.Value }}°</span>
       </div>
     </div>
   </div>

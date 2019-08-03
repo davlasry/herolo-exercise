@@ -1,39 +1,8 @@
-.predictions-container {
-  min-width: 800px;
-
-  .predictions-content {
-    padding: 50px;
-  }
-
-  .current-weather {
-    padding: 0 10px;
-
-    .main-temperature {
-      font-size: 52px;
-      font-weight: 700;
-
-      img {
-        margin-left: -15px;
-        height: 90px;
-      }
-    }
-
-    .city-name {
-      font-size: 22px;
-      margin-bottom: 5px;
-    }
-
-    .current-weather-text {
-      font-size: 14px;
-    }
-  }
-
-  .future-predictions {
-    margin-top: 40px;
-  }
+.future-predictions {
+  margin-top: 40px;
 
   .day-predictions {
-    margin: 0 10px;
+    margin: 10px;
     width: 120px;
     min-height: 160px;
     padding: 20px;

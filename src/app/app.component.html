@@ -1,5 +1,5 @@
 <div class="app-container" fxLayout="column">
-  <app-header></app-header>
+  <app-header [numberOfFavorites]="numberOfFavorites$ | async"></app-header>
   <div
     fxFlex
     fxLayout="column"

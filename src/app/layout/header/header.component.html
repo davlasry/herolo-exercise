@@ -1,7 +1,7 @@
 <div class="header-container">
   <div class="menu" fxLayout="row">
     <div class="title" fxLayout="column" fxLayoutAlign="center center">
-      <span>Herolo Weather App</span>
+      <span>Weather App</span>
     </div>
     <div fxFlex></div>
     <ul fxlayout="row" fxLayoutAlign="start center">
@@ -14,7 +14,14 @@
         >
       </li>
       <li>
-        <a routerLink="/favorites" routerLinkActive="active">Favorites</a>
+        <a
+          routerLink="/favorites"
+          routerLinkActive="active"
+          [matBadge]="numberOfFavorites"
+          matBadgeOverlap="false"
+          matBadgeColor="yellow"
+          >Favorites</a
+        >
       </li>
     </ul>
   </div>

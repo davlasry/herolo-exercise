@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType, createEffect } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
-import { map, mergeMap, catchError, concatMap } from 'rxjs/operators';
+import {
+  map,
+  mergeMap,
+  catchError,
+  concatMap,
+  switchMap
+} from 'rxjs/operators';
 import { FavoritesService } from '../services/favorites.service';
 import {
   getCurrentWeather,
   setCurrentWeather,
   getPredictions,
-  setPredictions
+  setPredictions,
+  setCurrentCity
 } from './actions';
 
 @Injectable()
@@ -37,6 +44,16 @@ export class WeatherEffects {
             return setPredictions({ predictions });
           })
         );
+      })
+    );
+  });
+
+  setCurrentCity$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(setCurrentCity),
+      switchMap(({ city }) => {
+        console.log('city:', city);
+        return [getPredictions({ city }), getCurrentWeather({ city })];
       })
     );
   });

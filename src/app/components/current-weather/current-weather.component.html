@@ -1,0 +1,24 @@
+<div class="current-weather-container">
+  <div *ngIf="isCurrentWeatherLoading">LOADING...</div>
+  <div *ngIf="!isCurrentWeatherLoading">
+    <div class="location" fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+        <span class="city-name">{{ currentCity?.LocalizedName }}</span>
+      </div>
+    </div>
+    <div class="current-weather-text">{{ currentWeather?.WeatherText }}</div>
+
+    <div class="main-temperature" fxLayout="row" fxLayoutAlign="start center">
+      <span
+        >{{ currentWeather?.Temperature.Metric.Value | number: '1.0-0' }}°</span
+      >
+      <img
+        src="https://developer.accuweather.com/sites/default/files/{{
+          getWeatherIconID(currentWeather?.WeatherIcon)
+        }}-s.png"
+        [alt]="currentWeather?.WeatherText"
+        [title]="currentWeather?.WeatherText"
+      />
+    </div>
+  </div>
+</div>

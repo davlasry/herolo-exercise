@@ -32,7 +32,7 @@ export class FavoritesService {
   }
 
   searchCity(textInput) {
-    // console.log('textInput:', textInput);
+    console.log('textInput:', textInput);
     return this.http.get<any>(
       `${this.API_BASE_URL}/locations/v1/cities/autocomplete?apikey=${
         this.API_KEY

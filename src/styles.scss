@@ -13,7 +13,7 @@ body {
   background: #c9d6ff; /* fallback for old browsers */
   background: -webkit-linear-gradient(to top, #60acfd, #1e7fe0);
   background: linear-gradient(to top, #60acfd, #1e7fe0);
-
+  overflow: hidden;
   height: 100vh;
   color: $primary-color;
 }
