@@ -21,7 +21,7 @@ import { ICity } from 'src/app/interfaces/city';
 export class SearchBarComponent implements OnInit {
   queryStringControl = new FormControl();
   options: ICity[];
-  filteredOptions$: Observable<string[]>;
+  filteredOptions$: Observable<ICity[]>;
   filteredOptions = [];
   isLoading = false;
 
@@ -47,7 +47,7 @@ export class SearchBarComponent implements OnInit {
       })
     );
 
-    this.filteredOptions$.subscribe((res: string[]) => {
+    this.filteredOptions$.subscribe((res: ICity[]) => {
       this.filteredOptions = res;
     });
   }
